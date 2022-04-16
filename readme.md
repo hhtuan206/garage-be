@@ -1,5 +1,2 @@
-## Vanguard - Advanced PHP Login and User Management
+## Managerment Garage Automobile Service
 
-- Website: https://vanguardapp.io
-- Documentation: https://milos.support-hub.io
-- Developed by [Milos Stojanovic](https://mstojanovic.net)
