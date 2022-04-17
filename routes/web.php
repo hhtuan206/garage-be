@@ -206,8 +206,13 @@ Route::group(['prefix' => 'install'], function () {
 });
 
 Route::resource('services','ServiceController');
-Route::group(['prefix' => 'import'],function (){
+Route::resource('components','ComponentController');
+Route::group(['prefix' => 'import','middleware'=>'auth'],function (){
     Route::get('/','ImportController@index')->name('imports.index');
-    Route::post('service','ImportController@importService')->name('imports.service');
     Route::get('service','ImportController@exportService')->name('exports.service');
+    Route::post('service','ImportController@importService')->name('imports.service');
+
+    Route::get('component','ImportController@exportComponent')->name('exports.component');
+    Route::post('component','ImportController@importComponent')->name('imports.component');
+
 });

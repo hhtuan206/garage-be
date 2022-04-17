@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('Services'))
-@section('page-heading', __('Services'))
+@section('page-title', __('Components'))
+@section('page-heading', __('Components'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('Services')
+        @lang('Components')
     </li>
 @stop
 
@@ -26,9 +26,9 @@
                         </form>
                     </div>
                     <div class="float-right ">
-                        <a href="{{ route('services.create') }}" class="btn btn-primary btn-rounded">
+                        <a href="{{ route('components.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add Service')
+                            @lang('Add Component')
                         </a>
                     </div>
                 </div>
@@ -38,35 +38,37 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
+                        <th class="min-width-100">@lang('Image')</th>
                         <th class="min-width-100">@lang('Name')</th>
                         <th class="min-width-150">@lang('Prices')</th>
                         <th class="min-width-150">@lang('Discount')</th>
                         <th class="min-width-150">@lang('Detail')</th>
-                        <th class="min-width-150">@lang('Status')</th>
+                        <th class="min-width-150">@lang('Stock')</th>
                         <th class="text-center">@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if (count($services))
-                        @foreach ($services as $service)
+                    @if (count($components))
+                        @foreach ($components as $component)
                             <tr>
-                                <td>{{ $service->name }}</td>
-                                <td>{{ $service->price }}</td>
-                                <td>{{ $service->discount }}</td>
-                                <td>{!!  \Illuminate\Support\Str::limit($service->detail,$limit = 30, $end = '...') !!} </td>
-                                <td>{{ $service->status ? 'active': 'deactivate' }}</td>
+                                <td><img src="{{asset('component/'.$component->image)}}" alt="" width="75px" height="75px"></td>
+                                <td>{{ $component->name }}</td>
+                                <td>{{ $component->price }}</td>
+                                <td>{{ $component->discount }}</td>
+                                <td>{!!  \Illuminate\Support\Str::limit($component->description,$limit = 30, $end = '...') !!} </td>
+                                <td>{{ $component->stock ?? 'Sold out' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('services.edit', $service) }}" class="btn btn-icon"
-                                       title="@lang('Edit Service')" data-toggle="tooltip" data-placement="top">
+                                    <a href="{{ route('components.edit', $component) }}" class="btn btn-icon"
+                                       title="@lang('Edit Component')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('services.destroy', $service) }}" class="btn btn-icon"
-                                       title="@lang('Delete Service')"
+                                    <a href="{{ route('components.destroy', $component) }}" class="btn btn-icon"
+                                       title="@lang('Delete Component')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
                                        data-confirm-title="@lang('Please Confirm')"
-                                       data-confirm-text="@lang('Are you sure that you want to delete this service?')"
+                                       data-confirm-text="@lang('Are you sure that you want to delete this component?')"
                                        data-confirm-delete="@lang('Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
@@ -84,7 +86,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-right">
-            {!! $services->links() !!}
+            {!! $components->links() !!}
         </div>
     </div>
 @stop
