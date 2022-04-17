@@ -3,6 +3,7 @@
 namespace Vanguard\Providers;
 
 use Vanguard\Plugins\VanguardServiceProvider as BaseVanguardServiceProvider;
+use Vanguard\Support\Plugins\Component;
 use Vanguard\Support\Plugins\Dashboard\Widgets\BannedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\LatestRegistrations;
 use Vanguard\Support\Plugins\Dashboard\Widgets\NewUsers;
@@ -27,6 +28,7 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             \Vanguard\Support\Plugins\Dashboard\Dashboard::class,
             Service::class,
             Import::class,
+            Component::class,
             \Vanguard\Support\Plugins\Users::class,
             \Vanguard\UserActivity\UserActivity::class,
             \Vanguard\Support\Plugins\RolesAndPermissions::class,

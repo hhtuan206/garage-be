@@ -14,3 +14,7 @@ yarn-error.log
 .env
 .phpunit.result.cache
 .php_cs.cache
+.jpg
+.png
+.jpeg
+.gif
