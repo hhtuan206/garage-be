@@ -95,4 +95,5 @@ class ComponentController extends Controller
         return redirect()->route('components.index')
             ->withSuccess(__('Component delete successfully.'));
     }
+
 }

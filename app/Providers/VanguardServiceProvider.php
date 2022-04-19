@@ -11,6 +11,7 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\RegistrationHistory;
 use Vanguard\Support\Plugins\Dashboard\Widgets\TotalUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UnconfirmedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
+use Vanguard\Support\Plugins\History;
 use Vanguard\Support\Plugins\Import;
 use Vanguard\Support\Plugins\Service;
 use \Vanguard\UserActivity\Widgets\ActivityWidget;
@@ -27,8 +28,9 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
         return [
             \Vanguard\Support\Plugins\Dashboard\Dashboard::class,
             Service::class,
-            Import::class,
             Component::class,
+            History::class,
+            Import::class,
             \Vanguard\Support\Plugins\Users::class,
             \Vanguard\UserActivity\UserActivity::class,
             \Vanguard\Support\Plugins\RolesAndPermissions::class,

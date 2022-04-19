@@ -95,7 +95,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
 
-
     /**
      * User Management
      */
@@ -205,14 +204,20 @@ Route::group(['prefix' => 'install'], function () {
     Route::get('error', 'InstallController@error')->name('install.error');
 });
 
-Route::resource('services','ServiceController');
-Route::resource('components','ComponentController');
-Route::group(['prefix' => 'import','middleware'=>'auth'],function (){
-    Route::get('/','ImportController@index')->name('imports.index');
-    Route::get('service','ImportController@exportService')->name('exports.service');
-    Route::post('service','ImportController@importService')->name('imports.service');
 
-    Route::get('component','ImportController@exportComponent')->name('exports.component');
-    Route::post('component','ImportController@importComponent')->name('imports.component');
+Route::post('findCustomer', 'HistoryController@findCustomer')->name('findCustomer');
+Route::post('render-component', 'HistoryController@renderComponent')->name('render-component');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('services', 'ServiceController');
+    Route::resource('components', 'ComponentController');
+    Route::resource('histories', 'HistoryController');
+});
+Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
+    Route::get('/', 'ImportController@index')->name('imports.index');
+    Route::get('service', 'ImportController@exportService')->name('exports.service');
+    Route::post('service', 'ImportController@importService')->name('imports.service');
+
+    Route::get('component', 'ImportController@exportComponent')->name('exports.component');
+    Route::post('component', 'ImportController@importComponent')->name('imports.component');
 
 });

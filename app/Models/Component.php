@@ -27,8 +27,9 @@ class Component extends Model
         parent::boot();
 
         static::creating(function ($component) {
-            $component->image = UploadImageTrait::upload($component->image);
-
+            if ($component->image instanceof UploadedFile) {
+                $component->image = UploadImageTrait::upload($component->image);
+            }
         });
 
         static::updating(function ($component) {

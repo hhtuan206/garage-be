@@ -14,7 +14,6 @@ class Car extends Model
         'chassis_number',
         'engine_number',
         'manufacturer_id',
-        'custom_id',
         'color_id',
         'type_id',
         'insurance_id'
