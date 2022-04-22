@@ -10,7 +10,7 @@ use function PHPUnit\Framework\isEmpty;
 
 trait UploadImageTrait
 {
-    public static function upload($image = '', $folder = 'component')
+    public static function upload($image = '', $folder = '')
     {
         $imageName = time() . '.' . $image->extension();
         $image->move(public_path($folder), $imageName);
