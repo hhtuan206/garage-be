@@ -2071,7 +2071,7 @@ function is_numeric (mixed_var) {
  *
  * Date formatter utility library that allows formatting date/time variables or Date objects using PHP DateTime format.
  * This library is a standalone javascript library and does not depend on other libraries or plugins like jQuery.
- * 
+ *
  * @see http://php.net/manual/en/function.date.php
  *
  * For more JQuery plugins visit http://plugins.krajee.com
@@ -5140,7 +5140,7 @@ c.toDisplay)return c.toDisplay(b,c,d);var e={d:b.getUTCDate(),D:q[d].daysShort[b
             _centerImage.call(self);
         }
 
-        
+
         _updateOverlay.call(self);
     }
 
@@ -5246,7 +5246,7 @@ c.toDisplay)return c.toDisplay(b,c,d);var e={d:b.getUTCDate(),D:q[d].daysShort[b
         y1 = Math.max(0, y1 / scale);
         x2 = Math.max(0, x2 / scale);
         y2 = Math.max(0, y2 / scale);
-       
+
         return {
             points: [fix(x1), fix(y1), fix(x2), fix(y2)],
             zoom: scale

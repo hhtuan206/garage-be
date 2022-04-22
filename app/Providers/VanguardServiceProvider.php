@@ -14,6 +14,7 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
 use Vanguard\Support\Plugins\History;
 use Vanguard\Support\Plugins\Import;
 use Vanguard\Support\Plugins\Service;
+use Vanguard\Support\Plugins\News;
 use \Vanguard\UserActivity\Widgets\ActivityWidget;
 
 class VanguardServiceProvider extends BaseVanguardServiceProvider
@@ -31,6 +32,7 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             Component::class,
             History::class,
             Import::class,
+            News::class,
             \Vanguard\Support\Plugins\Users::class,
             \Vanguard\UserActivity\UserActivity::class,
             \Vanguard\Support\Plugins\RolesAndPermissions::class,

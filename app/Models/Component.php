@@ -28,13 +28,13 @@ class Component extends Model
 
         static::creating(function ($component) {
             if ($component->image instanceof UploadedFile) {
-                $component->image = UploadImageTrait::upload($component->image);
+                $component->image = UploadImageTrait::upload($component->image,'component');
             }
         });
 
         static::updating(function ($component) {
             if ($component->image instanceof UploadedFile) {
-                $component->image = UploadImageTrait::upload($component->image);
+                $component->image = UploadImageTrait::upload($component->image,'component');
             }
         });
 
