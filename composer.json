@@ -1,5 +1,5 @@
 {
-    "name": "zinpro/doctor",
+    "name": "hhtuan206/garage",
     "description": "Advanced PHP Login and User Management",
     "keywords": [
         "advanced",
@@ -12,8 +12,8 @@
     ],
     "authors": [
         {
-            "name": "zinpro",
-            "email": "support@zinpro.vn",
+            "name": "hhtuan206",
+            "email": "hhtuan206@gmail.com",
             "homepage": "https://zinpro.vn",
             "role": "Developer"
         }
