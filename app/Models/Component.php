@@ -18,9 +18,19 @@ class Component extends Model
         'image',
         'price',
         'stock',
-        'discount',
+        'unit',
         'description',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function repairs()
+    {
+        return $this->belongsToMany(Repair::class,'repair_component','component_id');
+    }
 
     protected static function boot()
     {

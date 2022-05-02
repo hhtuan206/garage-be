@@ -208,16 +208,20 @@ Route::group(['prefix' => 'install'], function () {
 Route::post('findCustomer', 'HistoryController@findCustomer')->name('findCustomer');
 Route::post('render-component', 'HistoryController@renderComponent')->name('render-component');
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('services', 'ServiceController');
-    Route::resource('components', 'ComponentController');
-    Route::resource('histories', 'HistoryController');
-    Route::resource('news','NewsController');
+    Route::resource('services', 'Backend\ServiceController');
+    Route::resource('components', 'Backend\ComponentController');
+    Route::resource('news','Backend\NewsController');
+    Route::resource('values','Backend\ValueController');
+    Route::resource('attributes','Backend\AttributeController');
+    Route::resource('categories','Backend\CategoryController');
+    Route::resource('repairs','Backend\RepairController');
+    Route::resource('appointments','Backend\AppointmentController');
+    Route::resource('site','Backend\SiteController');
 });
 Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
     Route::get('/', 'ImportController@index')->name('imports.index');
     Route::get('service', 'ImportController@exportService')->name('exports.service');
     Route::post('service', 'ImportController@importService')->name('imports.service');
-
     Route::get('component', 'ImportController@exportComponent')->name('exports.component');
     Route::post('component', 'ImportController@importComponent')->name('imports.component');
 

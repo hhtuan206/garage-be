@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Mail;
 use Vanguard\Events\User\RequestedPasswordResetEmail;
+use Vanguard\Models\Appointment;
+use Vanguard\Models\Car;
 use Vanguard\Presenters\Traits\Presentable;
 use Vanguard\Presenters\UserPresenter;
 use Vanguard\Services\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatable;
@@ -112,5 +114,15 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
         Mail::to($this)->send(new \Vanguard\Mail\ResetPassword($token));
 
         event(new RequestedPasswordResetEmail($this));
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class,'user_id');
+    }
+
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class, 'user_id');
     }
 }

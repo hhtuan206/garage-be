@@ -4,6 +4,7 @@ namespace Vanguard\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Vanguard\User;
 
 class Appointment extends Model
 {
@@ -11,6 +12,12 @@ class Appointment extends Model
 
     protected $fillable = [
         'time',
-        'customer_id',
+        'user_id',
+        'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

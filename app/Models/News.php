@@ -15,27 +15,33 @@ class News extends Model
     protected $fillable = [
         'title',
         'content',
-        'image_cover',
+        'image',
+        'category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($news) {
-            if ($news->image_cover instanceof UploadedFile) {
-                $news->image_cover = UploadImageTrait::upload($news->image_cover,'new');
+            if ($news->image instanceof UploadedFile) {
+                $news->image = UploadImageTrait::upload($news->image_cover,'new');
             }
         });
 
         static::updating(function ($news) {
-            if ($news->image_cover instanceof UploadedFile) {
-                $news->image_cover = UploadImageTrait::upload($news->image_cover,'new');
+            if ($news->image instanceof UploadedFile) {
+                $news->image = UploadImageTrait::upload($news->image_cover,'new');
             }
         });
 
         static::deleting(function ($news) {
-            File::delete('new/' . $news->image_cover);
+            File::delete('new/' . $news->image);
         });
     }
 }

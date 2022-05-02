@@ -16,4 +16,9 @@ class Service extends Model
         'discount',
         'status',
     ];
+
+    public function repairs()
+    {
+        return $this->belongsToMany(Repair::class,'repair_service','service_id');
+    }
 }

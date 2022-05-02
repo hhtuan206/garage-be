@@ -11,11 +11,22 @@ class Car extends Model
 
     protected $fillable = [
         'number_plate',
-        'chassis_number',
         'engine_number',
-        'manufacturer_id',
-        'color_id',
-        'type_id',
-        'insurance_id'
+        'user_id'
     ];
+
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class,'car_attribute','car_id');
+    }
+
+    public function values()
+    {
+        return $this->belongsToMany(Value::class,'car_value','car_id');
+    }
+
+    public function repairs()
+    {
+        return $this->hasMany(Repair::class,'car_id');
+    }
 }

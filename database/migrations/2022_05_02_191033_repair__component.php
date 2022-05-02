@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class RepairComponent extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('repair_component', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('price');
-            $table->string('detail')->nullable();
-            $table->boolean('status')->nullable();
+            $table->integer('repair_id');
+            $table->integer('component_id');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        //
     }
 }

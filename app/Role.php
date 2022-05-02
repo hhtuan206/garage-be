@@ -5,6 +5,8 @@ namespace Vanguard;
 use Database\Factories\RoleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Vanguard\Models\Appointment;
+use Vanguard\Models\Car;
 use Vanguard\Support\Authorization\AuthorizationRoleTrait;
 
 class Role extends Model
@@ -38,4 +40,6 @@ class Role extends Model
     {
         return new RoleFactory;
     }
+
+
 }

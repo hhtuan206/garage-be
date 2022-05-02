@@ -19,7 +19,7 @@ class CreateComponentsTable extends Migration
             $table->string('image');
             $table->string('price');
             $table->string('stock');
-            $table->string('discount');
+            $table->string('unit');
             $table->string('description')->nullable();
             $table->timestamps();
         });
