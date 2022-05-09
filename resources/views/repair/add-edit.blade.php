@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('History'))
-@section('page-heading', $edit ? $history->name : __('Create New History'))
+@section('page-title', __('Repair'))
+@section('page-heading', $edit ? $repair->car->number_plate : __('Create New Repair'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('histories.index') }}">@lang('History')</a>
+        <a href="{{ route('repairs.index') }}">@lang('Repair')</a>
     </li>
     <li class="breadcrumb-item active">
         {{ __($edit ? 'Edit' : 'Create') }}
@@ -17,9 +17,9 @@
     @include('partials.messages')
 
     @if ($edit)
-        {!! Form::open(['route' => ['histories.update', $role], 'method' => 'PUT', 'id' => 'history-form']) !!}
+        {!! Form::open(['route' => ['repairs.update', $repair], 'method' => 'PUT']) !!}
     @else
-        {!! Form::open(['route' => 'histories.store', 'id' => 'history-form']) !!}
+        {!! Form::open(['route' => 'repairs.store','method'=>'POST']) !!}
     @endif
 
     <div class="card">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="exist">
-                        @include('history.partials.customer')
+                        @include('repair.partials.customer')
                     </div>
 
                 </div>
@@ -54,33 +54,16 @@
                         @lang('A general car information.')
                     </p>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-md-9">
                     <div class="car">
-                        @include('history.partials.car')
+                        @include('repair.partials.car')
+                        <div id="attribute-value" class=""></div>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5 class="card-title">
-                        @lang('Insurance Details')
-                    </h5>
-                    <p class="text-muted">
-                        @lang('A general Insurance information.')
-                    </p>
-                </div>
-                <div class="col-sm-9">
-                    <div class="">
-                        @include('history.partials.insurance')
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div class="card">
         <div class="card-body">
@@ -95,7 +78,7 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="">
-                        {!! Form::select('service_id[]',$services,null,['class'=>'form-control input-solid','multiple','id'=>'service']) !!}
+                        {!! Form::select('services[]',$services,null,['class'=>'form-control input-solid','multiple','id'=>'service']) !!}
                     </div>
                 </div>
             </div>
@@ -106,25 +89,25 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Service Details')
+                        @lang('Component Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general Service information.')
+                        @lang('A general Component information.')
                     </p>
                 </div>
                 <div class="col-sm-9">
                     <div class="">
-                        {!! Form::select('component_id[]',$components,null,['class'=>'form-control input-solid','multiple','id'=>'component']) !!}
+                        {!! Form::select('components[]',$components,null,['class'=>'form-control input-solid','multiple','id'=>'component']) !!}
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-            <div id="table"></div>
+            <div id="component-render"></div>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update History' : 'Create History') }}
+        {{ __($edit ? 'Update Repair' : 'Create Repair') }}
     </button>
 
 @stop
@@ -134,17 +117,24 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#full_name').keyup(function () {
-                if ($('#full_name').val() !== null) {
+            $('input[name=phone]').change(function () {
+                console.log($(this).val())
+                if ($('#phone').val() !== null) {
                     $.ajax({
                         url: '{{route('findCustomer')}}',
                         type: 'post',
                         data: {
-                            'full_name': $('#full_name').val()
-                        },
-                        success: function (res) {
-                            $('.exist').html(res)
-                        }, error: function () {
+                            'phone': $(this).val()
+                        }
+                    }).done(function (res) {
+                        console.log(res)
+                        if (!jQuery.isEmptyObject(res)) {
+                            console.log(res)
+                            $('#full_name').val(res.full_name);
+                            $('#email').val(res.email);
+                            $('#engine_number').val(res.engine_number);
+                            $('#number_plate').val(res.number_plate);
+                            $('#attribute').val(res.attributes).trigger('change');
                         }
                     })
                 }
@@ -159,12 +149,29 @@
                         'component': $(this).val()
                     },
                     success: function (res) {
-                        $('#table').html(res)
+                        $('#component-render').html(res)
+                    }
+                })
+            })
+
+            $('#attribute').on('change', function () {
+                console.log($(this).val()
+                )
+                $.ajax({
+                    url: '{{route("render-attribute")}}',
+                    type: "post",
+                    data: {
+                        'attribute': $(this).val()
+                    },
+                    success: function (res) {
+                        $('#attribute-value').html(res)
                     }
                 })
             })
             $('#service').select2();
             $('#component').select2();
+            $('#attribute').select2();
+
         })
     </script>
 

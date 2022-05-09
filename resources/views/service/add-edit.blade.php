@@ -52,15 +52,6 @@
                                placeholder="@lang('Price')"
                                value="{{ $edit ? $service->price : old('price') }}">
                     </div>
-                    <div class="form-group">
-                        <label for="discount">@lang('Discount')</label>
-                        <input type="text"
-                               class="form-control input-solid"
-                               id="discount"
-                               name="discount"
-                               placeholder="@lang('Discount')"
-                               value="{{ $edit ? $service->discount : old('discount') }}">
-                    </div>
 
                     <div class="form-group">
                         <label for="detail">@lang('Detail')</label>

@@ -205,14 +205,16 @@ Route::group(['prefix' => 'install'], function () {
 });
 
 
-Route::post('findCustomer', 'HistoryController@findCustomer')->name('findCustomer');
-Route::post('render-component', 'HistoryController@renderComponent')->name('render-component');
+Route::post('findCustomer', 'Users\UsersController@findCustomer')->name('findCustomer');
+Route::post('render-component', 'Backend\ComponentController@renderComponent')->name('render-component');
+Route::post('render-attribute', 'Backend\AttributeController@renderAttribute')->name('render-attribute');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('services', 'Backend\ServiceController');
     Route::resource('components', 'Backend\ComponentController');
     Route::resource('news','Backend\NewsController');
     Route::resource('values','Backend\ValueController');
     Route::resource('attributes','Backend\AttributeController');
+    Route::get('edit-attributes/{attribute}','Backend\AttributeController@editValue')->name('attribute.editAttributeValue');
     Route::resource('categories','Backend\CategoryController');
     Route::resource('repairs','Backend\RepairController');
     Route::resource('appointments','Backend\AppointmentController');

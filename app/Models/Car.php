@@ -22,7 +22,7 @@ class Car extends Model
 
     public function values()
     {
-        return $this->belongsToMany(Value::class,'car_value','car_id');
+        return $this->belongsToMany(Value::class,'car_value','car_id')->withPivot('attribute_id');
     }
 
     public function repairs()

@@ -87,7 +87,8 @@ class ComponentsImport implements ToCollection, WithHeadingRow
                 'stock' => $row['stock'],
                 'discount' => $row['discount'],
                 'description' => $row['description'],
-                'image' => $this->arr[$key],
+                'unit' => $row['description'],
+                'image' => $this->arr[$key] ?? null,
             ]);
         }
     }

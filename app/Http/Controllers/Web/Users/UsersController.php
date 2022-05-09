@@ -101,16 +101,16 @@ class UsersController extends Controller
         // When user is created by administrator, we will set his
         // status to Active by default.
         $data = $request->all() + [
-            'status' => UserStatus::ACTIVE,
-            'email_verified_at' => now()
-        ];
+                'status' => UserStatus::ACTIVE,
+                'email_verified_at' => now()
+            ];
 
-        if (! data_get($data, 'country_id')) {
+        if (!data_get($data, 'country_id')) {
             $data['country_id'] = null;
         }
 
         // Username should be updated only if it is provided.
-        if (! data_get($data, 'username')) {
+        if (!data_get($data, 'username')) {
             $data['username'] = null;
         }
 
@@ -159,5 +159,18 @@ class UsersController extends Controller
 
         return redirect()->route('users.index')
             ->withSuccess(__('User deleted successfully.'));
+    }
+
+    public function findCustomer(Request $request)
+    {
+        $user = User::where('phone', '=', $request->phone)->firstOrFail();
+        return response()->json([
+            'full_name' => $user->first_name ." " . $user->last_name,
+            'address' => $user->address,
+            'email' => $user->email,
+            'number_plate' => $user->cars[0]->number_plate,
+            'engine_number' => $user->cars[0]->engine_number,
+            'attributes' => $user->cars[0]->attributes->pluck('id')
+        ]);
     }
 }

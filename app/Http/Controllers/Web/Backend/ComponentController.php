@@ -17,6 +17,7 @@ class ComponentController extends Controller
      */
     public function index()
     {
+
         $components = Component::simplePaginate(6);
         return view('component.index', compact('components'));
     }
@@ -91,6 +92,12 @@ class ComponentController extends Controller
         Component::destroy($component->id);
         return redirect()->route('components.index')
             ->withSuccess(__('Component delete successfully.'));
+    }
+
+    public function renderComponent(Request $request)
+    {
+        $components = Component::find((array)$request->component);
+        return view('repair.partials.component', compact('components'));
     }
 
 }

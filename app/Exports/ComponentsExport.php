@@ -12,6 +12,6 @@ class ComponentsExport implements WithHeadings
 
     public function headings(): array
     {
-        return ['name','price','discount','stock','description','image'];
+        return ['name','price','discount','stock','description','unit','image'];
     }
 }

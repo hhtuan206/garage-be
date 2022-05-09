@@ -1,0 +1,115 @@
+@extends('layouts.app')
+
+@section('page-title', __('Attributes'))
+@section('page-heading', __('Attributes'))
+
+@section('breadcrumbs')
+    <li class="breadcrumb-item active">
+        @lang('Attributes')
+    </li>
+@stop
+
+@section('content')
+
+    @include('partials.messages')
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    All Attribute
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="users-table-wrapper">
+                        <table class="table table-striped table-borderless">
+                            <thead>
+                            <tr>
+                                <th>@lang('#')</th>
+                                <th>@lang('Name')</th>
+                                <th>@lang('Value')</th>
+                                <th class="text-center">@lang('Action')</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if (count($attributes))
+                                @foreach ($attributes as $key => $attribute)
+                                    <tr>
+                                        <td>{{$key}}</td>
+                                        <td>
+                                            <label for="">{{ $attribute->name }}</label>
+                                        </td>
+                                        <td>
+                                            @foreach($attribute->values as $value)
+                                                <span class="badge badge-info">{{$value->name}}</span>
+                                            @endforeach
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('attribute.editAttributeValue', $attribute) }}"
+                                               class="btn btn-icon"
+                                               title="@lang('Edit Attribute Value')" data-toggle="tooltip"
+                                               data-placement="top">
+                                                <i class="fa fa-cog"></i>
+                                            </a>
+                                            <a href="{{ route('attributes.edit', $attribute) }}" class="btn btn-icon"
+                                               title="@lang('Edit Attribute')" data-toggle="tooltip"
+                                               data-placement="top">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('attributes.destroy', $attribute) }}" class="btn btn-icon"
+                                               title="@lang('Delete Option')"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               data-method="DELETE"
+                                               data-confirm-title="@lang('Please Confirm')"
+                                               data-confirm-text="@lang('Are you sure that you want to delete this option?')"
+                                               data-confirm-delete="@lang('Yes, delete it!')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="4"><em>@lang('No records found.')</em></td>
+                                </tr>
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                {!! Form::open(['route' => 'attributes.store','method' => 'POST', 'id' => 'option-form']) !!}
+                <div class="card-header">
+                    Add New Attribute
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">@lang('Name')</label>
+                                <input type="text"
+                                       class="form-control input-solid"
+                                       id="name"
+                                       name="name"
+                                       placeholder="@lang('Attribute Name')"
+                                       value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+
+
+@stop
+

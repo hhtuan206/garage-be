@@ -13,8 +13,9 @@
                 <td>{{$key}}</td>
                 <td>{{$component->name}}</td>
                 <td>{{$component->price}}</td>
-                <td><input type="number" name="quantity[]" class="form-control input-solid"></td>
+                <td><input type="number" name="quantities[]" class="form-control input-solid" min="1" value="1"></td>
                 <td>{{$component->discount}}</td>
+                <td>{{$component->unit}}</td>
             </tr>
         @endforeach
         </tbody>

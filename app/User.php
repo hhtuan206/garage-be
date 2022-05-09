@@ -106,7 +106,7 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -118,11 +118,21 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
 
     public function cars()
     {
-        return $this->hasMany(Car::class,'user_id');
+        return $this->hasMany(Car::class, 'user_id');
     }
 
     public function appointment()
     {
         return $this->hasMany(Appointment::class, 'user_id');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getInfoAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name . '-' . $this->phone;
     }
 }

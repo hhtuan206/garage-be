@@ -10,7 +10,7 @@ class Repair extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['is_appointment','user_id','car_id'];
+    protected $fillable = ['is_appointment','user_id','car_id','total_price'];
 
     public function services()
     {
@@ -31,5 +31,15 @@ class Repair extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($repair) {
+            $repair->services()->detach();
+            $repair->components()->detach();
+        });
     }
 }

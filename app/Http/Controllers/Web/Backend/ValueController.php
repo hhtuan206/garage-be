@@ -4,28 +4,10 @@ namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Value;
 
 class ValueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,18 +17,9 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        Value::create($request->all());
+        return redirect()->back()
+            ->withSuccess(__('Attribute detele successfully.'));
     }
 
     /**
@@ -55,9 +28,9 @@ class ValueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Value $value)
     {
-        //
+        return view('attribute.edit-attribute-value',compact('value'));
     }
 
     /**
@@ -67,9 +40,11 @@ class ValueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Value $value)
     {
-        //
+        Value::find($value->id)->update($request->all());
+        return redirect()->route('attribute.editAttributeValue',$value->attribute_id)
+            ->withSuccess(__('Attribute detele successfully.'));
     }
 
     /**
@@ -78,8 +53,10 @@ class ValueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Value $value)
     {
-        //
+        Value::destroy($value->id);
+        return redirect()->back()
+            ->withSuccess(__('Attribute detele successfully.'));
     }
 }

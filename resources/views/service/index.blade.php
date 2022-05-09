@@ -40,7 +40,6 @@
                     <tr>
                         <th class="min-width-100">@lang('Name')</th>
                         <th class="min-width-150">@lang('Prices')</th>
-                        <th class="min-width-150">@lang('Discount')</th>
                         <th class="min-width-150">@lang('Detail')</th>
                         <th class="min-width-150">@lang('Status')</th>
                         <th class="text-center">@lang('Action')</th>
@@ -52,7 +51,6 @@
                             <tr>
                                 <td>{{ $service->name }}</td>
                                 <td>{{ $service->price }}</td>
-                                <td>{{ $service->discount }}</td>
                                 <td>{!!  \Illuminate\Support\Str::limit($service->detail,$limit = 30, $end = '...') !!} </td>
                                 <td>{{ $service->status ? 'active': 'deactivate' }}</td>
                                 <td class="text-center">

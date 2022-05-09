@@ -30,7 +30,6 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             \Vanguard\Support\Plugins\Dashboard\Dashboard::class,
             Service::class,
             Component::class,
-            History::class,
             Import::class,
             News::class,
             \Vanguard\Support\Plugins\Users::class,

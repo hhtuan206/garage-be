@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('Histories'))
-@section('page-heading', __('Histories'))
+@section('page-title', __('Repairs'))
+@section('page-heading', __('Repairs'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('Histories')
+        @lang('Repairs')
     </li>
 @stop
 
@@ -18,9 +18,9 @@
             <div class="row mb-3 pb-3 border-bottom-light">
                 <div class="col-lg-12">
                     <div class="float-right">
-                        <a href="{{ route('histories.create') }}" class="btn btn-primary btn-rounded">
+                        <a href="{{ route('repairs.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add History')
+                            @lang('Add Repair')
                         </a>
                     </div>
                 </div>
@@ -32,28 +32,32 @@
                     <tr>
                         <th class="min-width-100">@lang('Car')</th>
                         <th class="min-width-150">@lang('Customer Name')</th>
-                        <th class="min-width-150">@lang('Discount')</th>
-                        <th class="min-width-150">@lang('Last Total')</th>
-                        <th class="min-width-150">@lang('At')</th>
+                        <th class="min-width-150">@lang('Services')</th>
+                        <th class="min-width-150">@lang('Total')</th>
+                        <th class="min-width-150">@lang('Repair At')</th>
                         <th class="text-center">@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if (count($histories))
-                        @foreach ($histories as $history)
+                    @if (count($repairs))
+                        @foreach ($repairs as $repair)
                             <tr>
-                                <td>{{ $history->cars->number_plate }}</td>
-                                <td>{{ $history->customers->full_name}}</td>
-                                <td>{{ $history->discount}}</td>
-                                <td>{{ $history->last_total}}</td>
-                                <td>{{ $history->created_at }}</td>
+                                <td>{{ $repair->car->number_plate }}</td>
+                                <td>{{ $repair->user->fullname}}</td>
+                                <td>
+                                    @foreach($repair->services as $service)
+                                        <label class="badge badge-info">{{$service->name}}</label>
+                                    @endforeach
+                                    </td>
+                                <td>{{ $repair->total_price}}</td>
+                                <td>{{ $repair->created_at }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('histories.edit', $history) }}" class="btn btn-icon"
-                                       title="@lang('Edit History')" data-toggle="tooltip" data-placement="top">
+                                    <a href="{{ route('repairs.edit', $repair) }}" class="btn btn-icon"
+                                       title="@lang('Edit Repair')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('histories.destroy', $history) }}" class="btn btn-icon"
-                                       title="@lang('Delete History')"
+                                    <a href="{{ route('repairs.destroy', $repair) }}" class="btn btn-icon"
+                                       title="@lang('Delete Repair')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
