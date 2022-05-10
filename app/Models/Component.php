@@ -29,7 +29,7 @@ class Component extends Model
 
     public function repairs()
     {
-        return $this->belongsToMany(Repair::class,'repair_component','component_id');
+        return $this->belongsToMany(Repair::class,'repair_component','component_id')->withPivot('quantity');
     }
 
     protected static function boot()

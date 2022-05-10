@@ -52,7 +52,7 @@
                                 <td>{{ $repair->total_price}}</td>
                                 <td>{{ $repair->created_at }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('repairs.edit', $repair) }}" class="btn btn-icon"
+                                    <a href="{{ route('repairs.show', $repair) }}" class="btn btn-icon"
                                        title="@lang('Edit Repair')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
