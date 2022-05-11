@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('Components'))
-@section('page-heading', __('Components'))
+@section('page-title', __('Appointment'))
+@section('page-heading', __('Appointment'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('Components')
+        @lang('Appointment')
     </li>
 @stop
 
@@ -26,9 +26,9 @@
                         </form>
                     </div>
                     <div class="float-right ">
-                        <a href="{{ route('components.create') }}" class="btn btn-primary btn-rounded">
+                        <a href="{{ route('appointments.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add Component')
+                            @lang('Add Appointment')
                         </a>
                     </div>
                 </div>
@@ -38,37 +38,36 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-100">@lang('Image')</th>
-                        <th class="min-width-100">@lang('Name')</th>
-                        <th class="min-width-150">@lang('Prices')</th>
-                        <th class="min-width-150">@lang('Unit')</th>
-                        <th class="min-width-150">@lang('Detail')</th>
-                        <th class="min-width-150">@lang('Stock')</th>
+                        <th class="min-width-100">@lang('Customer')</th>
+                        <th class="min-width-150">@lang('Time')</th>
+                        <th class="min-width-150">@lang('Status')</th>
+
                         <th class="text-center">@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if (count($components))
-                        @foreach ($components as $component)
+                    @if (count($news))
+                        @foreach ($news as $new)
                             <tr>
-                                <td><img src="{{asset('component/'.$component->image)}}" alt="" width="75px" height="75px"></td>
-                                <td>{{ $component->name }}</td>
-                                <td>{{ $component->price }}</td>
-                                <td>{{ $component->unit }}</td>
-                                <td>{!!  \Illuminate\Support\Str::limit($component->description,$limit = 30, $end = '...') !!} </td>
-                                <td>{{ $component->stock ?? 'Sold out' }}</td>
+                                <td>{{ $new->title }}</td>
+                                <td>{!!  \Illuminate\Support\Str::limit($new->content,$limit = 30, $end = '...') !!} </td>
+                                <td> <img
+                                    class="rounded-squares img-responsive"
+                                    width="40"
+                                    src="{{asset('new/'.$new->image_cover)}}"
+                                    alt="{!! $new->title  !!}"></td>
                                 <td class="text-center">
-                                    <a href="{{ route('components.edit', $component) }}" class="btn btn-icon"
-                                       title="@lang('Edit Component')" data-toggle="tooltip" data-placement="top">
+                                    <a href="{{ route('news.edit', $new) }}" class="btn btn-icon"
+                                       title="@lang('Edit News')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('components.destroy', $component) }}" class="btn btn-icon"
-                                       title="@lang('Delete Component')"
+                                    <a href="{{ route('news.destroy', $new) }}" class="btn btn-icon"
+                                       title="@lang('Delete News')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
                                        data-confirm-title="@lang('Please Confirm')"
-                                       data-confirm-text="@lang('Are you sure that you want to delete this component?')"
+                                       data-confirm-text="@lang('Are you sure that you want to delete this service?')"
                                        data-confirm-delete="@lang('Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
@@ -86,7 +85,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-right">
-            {!! $components->links() !!}
+            {!! $news->links() !!}
         </div>
     </div>
 @stop

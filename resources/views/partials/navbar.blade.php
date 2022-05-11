@@ -2,7 +2,7 @@
 
     <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand mr-0" href="{{ url('/') }}">
-            ZinPro
+            <img src="{{asset('upload/'.$site[0]->content)}}" alt="" width="75">
         </a>
     </div>
 

@@ -10,6 +10,7 @@ use Vanguard\Models\Car;
 use Vanguard\Models\Component;
 use Vanguard\Models\Repair;
 use Vanguard\Models\Service;
+use Vanguard\Role;
 use Vanguard\User;
 
 class RepairController extends Controller
@@ -59,6 +60,8 @@ class RepairController extends Controller
             'first_name' => $full_name->first_name,
             'last_name' => $full_name->last_name,
             'address' => $request->address ?? "",
+            'role_id' => Role::where('name', 'User')->first()->id,
+            'status' => 'ACTIVE',
         ]);
 
         $car = Car::updateOrCreate(['number_plate' => $request->number_plate], [
@@ -85,14 +88,17 @@ class RepairController extends Controller
                 'total_price' => (string)$this->calculateTotal($request->services, $request->components, $request->quantities)
             ]);
             $repair->services()->sync($request->services);
-            if (count($request->components) > 1)
+            if (count($request->components) > 1){
                 foreach ($request->components as $key => $component) {
-                    $repair->components()->sync([$component => ['quantity' => $request->quantities[$key]]]);
+
+                    $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
                 }
-            else {
-                $repair->components()->sync([$request->components => ['quantity' => $request->quantities[0]]]);
+            }else {
+
+                $repair->components()->attach([$request->components => ['quantity' => $request->quantities[0]]]);
             }
         }
+
         return redirect()->route('repairs.index')
             ->withSuccess(__('Repair created successfully.'));
     }
@@ -105,7 +111,6 @@ class RepairController extends Controller
      */
     public function show(Repair $repair)
     {
-
         return view('invoice.index',compact('repair'));
     }
 

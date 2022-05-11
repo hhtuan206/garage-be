@@ -3,6 +3,7 @@
 namespace Vanguard\Providers;
 
 use Vanguard\Plugins\VanguardServiceProvider as BaseVanguardServiceProvider;
+use Vanguard\Support\Plugins\Appointment;
 use Vanguard\Support\Plugins\Component;
 use Vanguard\Support\Plugins\Dashboard\Widgets\BannedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\LatestRegistrations;
@@ -13,8 +14,10 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\UnconfirmedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
 use Vanguard\Support\Plugins\History;
 use Vanguard\Support\Plugins\Import;
+use Vanguard\Support\Plugins\Repair;
 use Vanguard\Support\Plugins\Service;
 use Vanguard\Support\Plugins\News;
+use Vanguard\Support\Plugins\Site;
 use \Vanguard\UserActivity\Widgets\ActivityWidget;
 
 class VanguardServiceProvider extends BaseVanguardServiceProvider
@@ -28,10 +31,13 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
     {
         return [
             \Vanguard\Support\Plugins\Dashboard\Dashboard::class,
+            Appointment::class,
+            Repair::class,
             Service::class,
             Component::class,
             Import::class,
             News::class,
+            Site::class,
             \Vanguard\Support\Plugins\Users::class,
             \Vanguard\UserActivity\UserActivity::class,
             \Vanguard\Support\Plugins\RolesAndPermissions::class,

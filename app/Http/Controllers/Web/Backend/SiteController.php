@@ -4,6 +4,8 @@ namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Site;
+use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
 {
@@ -14,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.index');
     }
 
     /**
@@ -30,56 +32,17 @@ class SiteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Site::find(1)->update(['content' => $request->logo ?? '']);
+        Site::find(2)->update(['content' => $request->email ?? '']);
+        Site::find(3)->update(['content' => $request->phone ?? '']);
+        Site::find(4)->update(['content' => $request->address ?? '']);
+        return redirect()->route('site.index')
+            ->withSuccess(__('Site config update successfully.'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

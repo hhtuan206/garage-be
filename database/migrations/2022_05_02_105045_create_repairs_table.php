@@ -17,7 +17,7 @@ class CreateRepairsTable extends Migration
             $table->id();
             $table->integer('car_id');
             $table->integer('user_id');
-            $table->string('is_appointment');
+            $table->string('is_appointment')->nullable();
             $table->string('total_price');
             $table->timestamps();
         });

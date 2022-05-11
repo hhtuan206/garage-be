@@ -4,6 +4,9 @@ namespace Vanguard\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Fluent;
+use Vanguard\Models\Site;
 use Vanguard\Repositories\Country\CountryRepository;
 use Vanguard\Repositories\Country\EloquentCountry;
 use Vanguard\Repositories\Permission\EloquentPermission;
@@ -25,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Carbon::setLocale(config('app.locale'));
         config(['app.name' => setting('app_name')]);
         \Illuminate\Database\Schema\Builder::defaultStringLength(191);
@@ -32,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         Factory::guessFactoryNamesUsing(function (string $modelName) {
             return 'Database\Factories\\'.class_basename($modelName).'Factory';
         });
+        View::share('site', new Fluent(Site::all()));
     }
 
     /**

@@ -18,7 +18,7 @@ class CarValue extends Migration
             $table->integer('car_id');
             $table->integer('value_id');
             $table->integer('attribute_id');
-            $table->timestamps();
+
         });
     }
 

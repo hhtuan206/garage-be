@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('page-title', __('Component'))
-@section('page-heading', $edit ? $component->name : __('Create New Service'))
+@section('page-heading', $edit ? $component->name : __('Create New Component'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('services.index') }}">@lang('Service')</a>
+        <a href="{{ route('components.index') }}">@lang('Component')</a>
     </li>
     <li class="breadcrumb-item active">
         {{ __($edit ? 'Edit' : 'Create') }}
@@ -40,7 +40,7 @@
                                class="form-control input-solid"
                                id="name"
                                name="name"
-                               placeholder="@lang('Service Name')"
+                               placeholder="@lang('Component')"
                                value="{{ $edit ? $component->name : old('name') }}">
                     </div>
                     <div class="form-group">
@@ -53,13 +53,13 @@
                                value="{{ $edit ? $component->price : old('price') }}">
                     </div>
                     <div class="form-group">
-                        <label for="discount">@lang('Discount')</label>
+                        <label for="discount">@lang('Unit')</label>
                         <input type="text"
                                class="form-control input-solid"
-                               id="discount"
-                               name="discount"
-                               placeholder="@lang('Discount')"
-                               value="{{ $edit ? $component->discount : old('discount') }}">
+                               id="unit"
+                               name="unit"
+                               placeholder="@lang('Unit')"
+                               value="{{ $edit ? $component->unit : old('unit') }}">
                     </div>
                     <div class="form-group">
                         <label for="stock">@lang('Stock')</label>
@@ -71,7 +71,7 @@
                                value="{{ $edit ? $component->stock : old('stock') }}">
                     </div>
                     <div class="form-group">
-                        <label for="detail">@lang('Detail')</label>
+                        <label for="detail">@lang('Description')</label>
                         <textarea name="description"
                                   id="description"
                                   class="form-control input-solid">{{ $edit ? $component->description : old('description') }}</textarea>
@@ -80,7 +80,8 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 @if($edit)
-                                    <img src="{{asset('component/'. $component->image )}}" width="75px" height="75px" alt="">
+                                    <img src="{{asset('component/'. $component->image )}}" width="75px" height="75px"
+                                         alt="">
                                 @else
                                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                                 @endif
