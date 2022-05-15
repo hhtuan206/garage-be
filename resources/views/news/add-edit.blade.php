@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('page-title', __('News'))
-@section('page-heading', $edit ? $news->title : __('Create New News'))
+@section('page-title', __('vn.News'))
+@section('page-heading', $edit ? $news->title : __('vn.Create New News'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('news.index') }}">@lang('News')</a>
+        <a href="{{ route('news.index') }}">@lang('vn.News')</a>
     </li>
     <li class="breadcrumb-item active">
-        {{ __($edit ? 'Edit' : 'Create') }}
+        {{ __($edit ? 'vn.Edit' : 'vn.Create') }}
     </li>
 @stop
 
@@ -27,30 +27,30 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('News Details')
+                        @lang('vn.News Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general new information.')
+                        @lang('vn.A general new information.')
                     </p>
                 </div>
                 <div class="col-md-9">
                     <div class="form-group">
-                        <label for="name">@lang('Title')</label>
+                        <label for="name">@lang('vn.Title')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="title"
                                name="title"
-                               placeholder="@lang('Title')"
+                               placeholder="@lang('vn.Title')"
                                value="{{ $edit ? $news->title : old('title') }}">
                     </div>
                     <div class="form-group">
-                        <label for="content">@lang('Content')</label>
+                        <label for="content">@lang('vn.Content')</label>
                         <textarea name="content"
                                   id="content"
                                   class="form-control input-solid">{{ $edit ? $news->content : old('content') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Image Cover</label>
+                        <label>@lang('vn.Image Cover')</label>
                         <input type="file" class="form-control"  name="image_cover" id="image_cover">
                     </div>
                 </div>
@@ -59,7 +59,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update News' : 'Create News') }}
+        {{ __($edit ? 'vn.Update News' : 'vn.Create News') }}
     </button>
 
 @stop

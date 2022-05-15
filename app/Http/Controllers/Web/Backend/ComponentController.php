@@ -100,4 +100,13 @@ class ComponentController extends Controller
         return view('repair.partials.component', compact('components'));
     }
 
+    public function updateStock(Request $request, $id)
+    {
+        $compnent =  Component::find($id);
+        $compnent->stock = (int)$request->stock + (int)$compnent->stock;
+        $compnent->save();
+        return redirect()->route('components.index')
+            ->withSuccess(__('Cập nhật tồn kho thành công'));
+    }
+
 }

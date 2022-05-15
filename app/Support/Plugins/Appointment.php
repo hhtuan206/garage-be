@@ -10,7 +10,7 @@ class Appointment extends \Vanguard\Plugins\Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Appointment'))
+        return Item::create(__('vn.Appointment'))
             ->route('appointments.index')
             ->icon('fas fa-book-open')
             ->active("appointments*");

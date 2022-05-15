@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('Imports'))
-@section('page-heading', __('Imports'))
+@section('page-title', __('vn.Imports'))
+@section('page-heading', __('vn.Imports'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('Imports')
+        @lang('vn.Imports')
     </li>
 @stop
 
@@ -19,27 +19,27 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5 class="card-title">
-                                @lang('Service Import')
+                                @lang('vn.Service Import')
                             </h5>
                             <p class="text-muted">
-                                @lang('Download this file and fill out sample.')
-                                <a href="{{route('exports.service')}}">Download</a>
+                                @lang('vn.Download this file and fill out sample.')
+                                <a href="{{route('exports.service')}}">@lang('vn.Download')</a>
                             </p>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 @csrf
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="service_import">
-                                    <label class="custom-file-label" for="inputGroupFile01" >Choose
-                                        file</label>
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                           name="service_import">
+                                    <label class="custom-file-label" for="inputGroupFile01">@lang('vn.Choosefile')</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-muted text-right">
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary"> @lang('vn.Upload')</button>
                 </div>
             </div>
         </div>
@@ -51,27 +51,27 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5 class="card-title">
-                                @lang('Component Import')
+                                @lang('vn.Component Import')
                             </h5>
                             <p class="text-muted">
-                                @lang('Download this file and fill out sample.')
-                                <a href="{{route('exports.component')}}">Download</a>
+                                @lang('vn.Download this file and fill out sample.')
+                                <a href="{{route('exports.component')}}">@lang('vn.Download')</a>
                             </p>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 @csrf
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="component_import">
-                                    <label class="custom-file-label" for="inputGroupFile01" >Choose
-                                        file</label>
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                           name="component_import">
+                                    <label class="custom-file-label" for="inputGroupFile01">@lang('vn.Choosefile')</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-muted text-right">
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">@lang('vn.Upload')</button>
                 </div>
             </div>
         </div>

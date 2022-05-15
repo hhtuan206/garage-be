@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    All Attribute
+                    @lang('vn.All Information')
                 </div>
                 <div class="card-body">
                     <div class="table-responsive" id="users-table-wrapper">
@@ -24,9 +24,9 @@
                             <thead>
                             <tr>
                                 <th>@lang('#')</th>
-                                <th>@lang('Name')</th>
-                                <th>@lang('Value')</th>
-                                <th class="text-center">@lang('Action')</th>
+                                <th>@lang('vn.Name')</th>
+                                <th>@lang('vn.Value')</th>
+                                <th class="text-center">@lang('vn.Action')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,23 +45,23 @@
                                         <td class="text-center">
                                             <a href="{{ route('attribute.editAttributeValue', $attribute) }}"
                                                class="btn btn-icon"
-                                               title="@lang('Edit Attribute Value')" data-toggle="tooltip"
+                                               title="@lang('vn.Edit Attribute Value')" data-toggle="tooltip"
                                                data-placement="top">
                                                 <i class="fa fa-cog"></i>
                                             </a>
                                             <a href="{{ route('attributes.edit', $attribute) }}" class="btn btn-icon"
-                                               title="@lang('Edit Attribute')" data-toggle="tooltip"
+                                               title="@lang('vn.Edit Attribute')" data-toggle="tooltip"
                                                data-placement="top">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a href="{{ route('attributes.destroy', $attribute) }}" class="btn btn-icon"
-                                               title="@lang('Delete Option')"
+                                               title="@lang('vn.Delete Option')"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                data-method="DELETE"
-                                               data-confirm-title="@lang('Please Confirm')"
-                                               data-confirm-text="@lang('Are you sure that you want to delete this option?')"
-                                               data-confirm-delete="@lang('Yes, delete it!')">
+                                               data-confirm-title="@lang('vn.Please Confirm')"
+                                               data-confirm-text="@lang('vn.Are you sure that you want to delete this option?')"
+                                               data-confirm-delete="@lang('vn.Yes, delete it!')">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -69,7 +69,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="4"><em>@lang('No records found.')</em></td>
+                                    <td colspan="4"><em>@lang('vn.No records found.')</em></td>
                                 </tr>
                             @endif
                             </tbody>

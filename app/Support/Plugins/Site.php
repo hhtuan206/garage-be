@@ -10,7 +10,7 @@ class Site extends \Vanguard\Plugins\Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Site'))
+        return Item::create(__('vn.Site'))
             ->route('site.index')
             ->icon('fa fa-sitemap')
             ->active("site*");

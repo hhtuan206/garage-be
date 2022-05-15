@@ -22,6 +22,13 @@ class RolesSeeder extends Seeder
         ]);
 
         Role::create([
+            'name' => 'Staff',
+            'display_name' => 'Staff',
+            'description' => 'This is staff in garage.',
+            'removable' => false
+        ]);
+
+        Role::create([
             'name' => 'User',
             'display_name' => 'User',
             'description' => 'Default system user.',

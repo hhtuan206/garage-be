@@ -10,7 +10,7 @@ class Import extends \Vanguard\Plugins\Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Import'))
+        return Item::create(__('vn.Import'))
             ->route('imports.index')
             ->icon('fas fa-rainbow')
             ->active("imports*");

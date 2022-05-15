@@ -3,7 +3,12 @@
 namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Fluent;
+use phpDocumentor\Reflection\Types\This;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Appointment;
+use Vanguard\Role;
+use Vanguard\User;
 
 class AppointmentController extends Controller
 {
@@ -14,7 +19,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $appointments = Appointment::simplePaginate(6);
+        return view('appointment.index', compact('appointments'));
     }
 
     /**
@@ -24,7 +30,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('a');
+        return view('appointment.add-edit', [
+            'edit' => false
+        ]);
     }
 
     /**
@@ -35,7 +43,28 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $full_name = $this->parseName($request->full_name);
+        $user = User::updateOrCreate(['phone' => $request->phone], [
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'first_name' => $full_name->first_name,
+            'last_name' => $full_name->last_name,
+            'address' => $request->address ?? "",
+            'role_id' => Role::where('name', 'User')->first()->id,
+            'status' => 'ACTIVE',
+        ]);
+        $appointment = Appointment::updateOrCreate([
+            'user_id' => $user->id,
+            'date' => date('Y-m-d', strtotime($request->time)),
+            'status' => $request->status
+        ], [
+            'user_id' => $user->id,
+            'time' => date('H:i', strtotime($request->time)),
+            'date' => date('Y-m-d', strtotime($request->time)),
+            'status' => $request->status,
+        ]);
+        return redirect()->route('appointments.index')
+            ->withSuccess(__('Appointment created successfully.'));
     }
 
     /**
@@ -55,9 +84,13 @@ class AppointmentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Appointment $appointment)
     {
-        //
+        return view('appointment.add-edit', [
+            'edit' => true,
+            'appointment' => $appointment,
+            'customer'=>User::find($appointment->user_id)
+        ]);
     }
 
     /**
@@ -67,9 +100,26 @@ class AppointmentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Appointment $appointment)
     {
-        //
+        $full_name = $this->parseName($request->full_name);
+        $user = User::where('phone', $request->phone)->update([
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'first_name' => $full_name->first_name,
+            'last_name' => $full_name->last_name,
+            'address' => $request->address ?? "",
+            'role_id' => Role::where('name', 'User')->first()->id,
+            'status' => 'ACTIVE',
+        ]);
+        Appointment::find($appointment->id)->update([
+            'user_id' => $user->id,
+            'time' => date('H:i', strtotime($request->time)),
+            'date' => date('Y-m-d', strtotime($request->time)),
+            'status' => $request->status,
+        ]);
+        return redirect()->route('appointments.index')
+            ->withSuccess(__('Appointment updated successfully.'));
     }
 
     /**
@@ -78,8 +128,19 @@ class AppointmentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Appointment $appointment)
     {
-        //
+        Appointment::destroy($appointment->id);
+        return redirect()->route('appointments.index')
+            ->withSuccess(__('Appointment deleted successfully.'));
+    }
+
+    public function parseName($name)
+    {
+        $split = explode(" ", $name);
+        return new Fluent([
+            'first_name' => array_shift($split),
+            'last_name' => implode(" ", $split),
+        ]);
     }
 }

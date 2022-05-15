@@ -57,7 +57,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         // In case that request throttling is enabled, we have to check if user can perform this request.
-        // We'll key this by the username and the IP address of the client making these requests into this application.
+        // We'll key this by the username and the IP address of the customer making these requests into this application.
         $throttles = setting('throttle_enabled');
 
         //Redirect URL that can be passed as hidden field.

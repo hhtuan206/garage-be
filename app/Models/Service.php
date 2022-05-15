@@ -21,4 +21,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Repair::class,'repair_service','service_id');
     }
+
+    public function getPricesAttribute()
+    {
+        return number_format($this->price,0);
+    }
 }

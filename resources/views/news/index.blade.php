@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('News'))
-@section('page-heading', __('News'))
+@section('page-title', __('vn.News'))
+@section('page-heading', __('vn.News'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('News')
+        @lang('vn.News')
     </li>
 @stop
 
@@ -28,7 +28,7 @@
                     <div class="float-right ">
                         <a href="{{ route('news.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add News')
+                            @lang('vn.Add News')
                         </a>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-100">@lang('Title')</th>
-                        <th class="min-width-150">@lang('Content')</th>
-                        <th class="min-width-150">@lang('Image Cover')</th>
+                        <th class="min-width-100">@lang('vn.Title')</th>
+                        <th class="min-width-150">@lang('vn.Content')</th>
+                        <th class="min-width-150">@lang('vn.Image Cover')</th>
 
-                        <th class="text-center">@lang('Action')</th>
+                        <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,17 +58,17 @@
                                     alt="{!! $new->title  !!}"></td>
                                 <td class="text-center">
                                     <a href="{{ route('news.edit', $new) }}" class="btn btn-icon"
-                                       title="@lang('Edit News')" data-toggle="tooltip" data-placement="top">
+                                       title="@lang('vn.Edit News')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('news.destroy', $new) }}" class="btn btn-icon"
-                                       title="@lang('Delete News')"
+                                       title="@lang('vn.Delete News')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
-                                       data-confirm-title="@lang('Please Confirm')"
-                                       data-confirm-text="@lang('Are you sure that you want to delete this service?')"
-                                       data-confirm-delete="@lang('Yes, delete it!')">
+                                       data-confirm-title="@lang('vn.Please Confirm')"
+                                       data-confirm-text="@lang('vn.Are you sure that you want to delete this news?')"
+                                       data-confirm-delete="@lang('vn.Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -77,7 +77,7 @@
 
                     @else
                         <tr>
-                            <td colspan="4"><em>@lang('No records found.')</em></td>
+                            <td colspan="4"><em>@lang('vn.No records found.')</em></td>
                         </tr>
                     @endif
                     </tbody>

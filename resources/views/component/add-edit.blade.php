@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('page-title', __('Component'))
-@section('page-heading', $edit ? $component->name : __('Create New Component'))
+@section('page-title', __('vn.Component'))
+@section('page-heading', $edit ? $component->name : __('vn.Create New Component'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('components.index') }}">@lang('Component')</a>
+        <a href="{{ route('components.index') }}">@lang('vn.Component')</a>
     </li>
     <li class="breadcrumb-item active">
-        {{ __($edit ? 'Edit' : 'Create') }}
+        {{ __($edit ? 'vn.Edit' : 'vn.Create') }}
     </li>
 @stop
 
@@ -27,51 +27,51 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Component Details')
+                        @lang('vn.Component Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general component information.')
+                        @lang('vn.A general component information.')
                     </p>
                 </div>
                 <div class="col-md-9">
                     <div class="form-group">
-                        <label for="name">@lang('Name')</label>
+                        <label for="name">@lang('vn.Name')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="name"
                                name="name"
-                               placeholder="@lang('Component')"
+                               placeholder="@lang('vn.Component')"
                                value="{{ $edit ? $component->name : old('name') }}">
                     </div>
                     <div class="form-group">
-                        <label for="price">@lang('Price')</label>
+                        <label for="price">@lang('vn.Price')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="price"
                                name="price"
-                               placeholder="@lang('Price')"
+                               placeholder="@lang('vn.Price')"
                                value="{{ $edit ? $component->price : old('price') }}">
                     </div>
                     <div class="form-group">
-                        <label for="discount">@lang('Unit')</label>
+                        <label for="discount">@lang('vn.Unit')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="unit"
                                name="unit"
-                               placeholder="@lang('Unit')"
+                               placeholder="@lang('vn.Unit')"
                                value="{{ $edit ? $component->unit : old('unit') }}">
                     </div>
                     <div class="form-group">
-                        <label for="stock">@lang('Stock')</label>
+                        <label for="stock">@lang('vn.Stock')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="stock"
                                name="stock"
-                               placeholder="@lang('Stock')"
+                               placeholder="@lang('vn.Stock')"
                                value="{{ $edit ? $component->stock : old('stock') }}">
                     </div>
                     <div class="form-group">
-                        <label for="detail">@lang('Description')</label>
+                        <label for="detail">@lang('vn.Description')</label>
                         <textarea name="description"
                                   id="description"
                                   class="form-control input-solid">{{ $edit ? $component->description : old('description') }}</textarea>
@@ -100,7 +100,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update Component' : 'Create Component') }}
+        {{ __($edit ? 'vn.Update Component' : 'vn.Create Component') }}
     </button>
 
 @stop

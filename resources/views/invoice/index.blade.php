@@ -35,7 +35,7 @@
             <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i
                     class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
             </span>
-                Company Name, Inc
+                {{$site[0]->content}}
             </div>
             <!-- end invoice-company -->
             <!-- begin invoice-header -->

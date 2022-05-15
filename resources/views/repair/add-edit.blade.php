@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('page-title', __('Repair'))
-@section('page-heading', $edit ? $repair->car->number_plate : __('Create New Repair'))
+@section('page-title', __('vn.Repair'))
+@section('page-heading', $edit ? $repair->car->number_plate : __('vn.Create New Repair'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('repairs.index') }}">@lang('Repair')</a>
+        <a href="{{ route('repairs.index') }}">@lang('vn.Repair')</a>
     </li>
     <li class="breadcrumb-item active">
-        {{ __($edit ? 'Edit' : 'Create') }}
+        {{ __($edit ? 'vn.Edit' : 'vn.Create') }}
     </li>
 @stop
 
@@ -27,10 +27,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Customer Details')
+                        @lang('vn.Customer Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general customer information.')
+                        @lang('vn.A general customer information.')
                     </p>
                 </div>
                 <div class="col-sm-9">
@@ -48,15 +48,15 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Car Details')
+                        @lang('vn.Car Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general car information.')
+                        @lang('vn.A general car information.')
                     </p>
                 </div>
                 <div class="col-md-9">
                     <div class="car">
-                        @include('repair.partials.car')
+                        @include('vn.repair.partials.car')
                         <div id="attribute-value" class=""></div>
                     </div>
                 </div>
@@ -70,10 +70,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Service Details')
+                        @lang('vn.Service Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general Service information.')
+                        @lang('vn.A general Service information.')
                     </p>
                 </div>
                 <div class="col-sm-9">
@@ -89,10 +89,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Component Details')
+                        @lang('vn.Component Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general Component information.')
+                        @lang('vn.A general Component information.')
                     </p>
                 </div>
                 <div class="col-sm-9">
@@ -107,7 +107,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update Repair' : 'Create Repair') }}
+        {{ __($edit ? 'vn.Update Repair' : 'vn.Create Repair') }}
     </button>
 
 @stop

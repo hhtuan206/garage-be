@@ -8468,7 +8468,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Get the client IP address.
+         * Get the customer IP address.
          *
          * @return string|null
          * @static
@@ -8480,7 +8480,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Get the client IP addresses.
+         * Get the customer IP addresses.
          *
          * @return array
          * @static
@@ -8492,7 +8492,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Get the client user agent.
+         * Get the customer user agent.
          *
          * @return string
          * @static
@@ -9062,15 +9062,15 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Returns the client IP addresses.
+         * Returns the customer IP addresses.
          *
          * In the returned array the most trusted IP address is first, and the
-         * least trusted one last. The "real" client IP address is the last one,
+         * least trusted one last. The "real" customer IP address is the last one,
          * but this is also the least trusted one. Trusted proxies are stripped.
          *
          * Use this method carefully; you should use getClientIp() instead.
          *
-         * @return array The client IP addresses
+         * @return array The customer IP addresses
          * @see getClientIp()
          * @static
          */
@@ -9082,19 +9082,19 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Returns the client IP address.
+         * Returns the customer IP address.
          *
-         * This method can read the client IP address from the "X-Forwarded-For" header
+         * This method can read the customer IP address from the "X-Forwarded-For" header
          * when trusted proxies were set via "setTrustedProxies()". The "X-Forwarded-For"
          * header value is a comma+space separated list of IP addresses, the left-most
-         * being the original client, and each successive proxy that passed the request
+         * being the original customer, and each successive proxy that passed the request
          * adding the IP address where it received the request from.
          *
          * If your reverse proxy uses a different header name than "X-Forwarded-For",
          * ("Client-Ip" for instance), configure it via the $trustedHeaderSet
          * argument of the Request::setTrustedProxies() method instead.
          *
-         * @return string|null The client IP address
+         * @return string|null The customer IP address
          * @see getClientIps()
          * @see https://wikipedia.org/wiki/X-Forwarded-For
          * @static
@@ -9195,10 +9195,10 @@ namespace Illuminate\Support\Facades {
         /**
          * Returns the port on which the request is made.
          *
-         * This method can read the client port from the "X-Forwarded-Port" header
+         * This method can read the customer port from the "X-Forwarded-Port" header
          * when trusted proxies were set via "setTrustedProxies()".
          *
-         * The "X-Forwarded-Port" header must contain the client port.
+         * The "X-Forwarded-Port" header must contain the customer port.
          *
          * @return int|string can be a string if fetched from the server bag
          * @static
@@ -9365,7 +9365,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Checks whether the request is secure or not.
          *
-         * This method can read the client protocol from the "X-Forwarded-Proto" header
+         * This method can read the customer protocol from the "X-Forwarded-Proto" header
          * when trusted proxies were set via "setTrustedProxies()".
          *
          * The "X-Forwarded-Proto" header must contain the protocol: "https" or "http".
@@ -9383,10 +9383,10 @@ namespace Illuminate\Support\Facades {
         /**
          * Returns the host name.
          *
-         * This method can read the client host name from the "X-Forwarded-Host" header
+         * This method can read the customer host name from the "X-Forwarded-Host" header
          * when trusted proxies were set via "setTrustedProxies()".
          *
-         * The "X-Forwarded-Host" header must contain the client host name.
+         * The "X-Forwarded-Host" header must contain the customer host name.
          *
          * @return string
          * @throws SuspiciousOperationException when the host name is invalid or not trusted
@@ -9652,7 +9652,7 @@ namespace Illuminate\Support\Facades {
          * Returns the protocol version.
          *
          * If the application is behind a proxy, the protocol version used in the
-         * requests between the client and the proxy and between the proxy and the
+         * requests between the customer and the proxy and between the proxy and the
          * server might be different. This returns the former (from the "Via" header)
          * if the proxy is trusted (see "setTrustedProxies()"), otherwise it returns
          * the latter (from the "SERVER_PROTOCOL" server parameter).
@@ -9738,7 +9738,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Gets a list of languages acceptable by the client browser.
+         * Gets a list of languages acceptable by the customer browser.
          *
          * @return array Languages ordered in the user browser preferences
          * @static
@@ -9751,7 +9751,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Gets a list of charsets acceptable by the client browser.
+         * Gets a list of charsets acceptable by the customer browser.
          *
          * @return array List of charsets in preferable order
          * @static
@@ -9764,7 +9764,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Gets a list of encodings acceptable by the client browser.
+         * Gets a list of encodings acceptable by the customer browser.
          *
          * @return array List of encodings in preferable order
          * @static
@@ -9777,7 +9777,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Gets a list of content types acceptable by the client browser.
+         * Gets a list of content types acceptable by the customer browser.
          *
          * @return array List of content types in preferable order
          * @static

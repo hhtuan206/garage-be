@@ -11,7 +11,7 @@ class Service extends Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Services'))
+        return Item::create(__('vn.Services'))
             ->route('services.index')
             ->icon('fab fa-servicestack')
             ->active("services*");

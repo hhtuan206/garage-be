@@ -12,6 +12,7 @@ class Appointment extends Model
 
     protected $fillable = [
         'time',
+        'date',
         'user_id',
         'status',
     ];
@@ -19,5 +20,18 @@ class Appointment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getDateTimeAttribute()
+    {
+        return $this->date . " " . $this->time;
+    }
+
+    public function getStatussAttribute()
+    {
+        if ($this->status == 'Waiting') {
+            return '<label for="" class="badge badge-primary">' . $this->status . '</label>';
+        }
+        return '<label for="" class="badge badge-info">' . $this->status . '</label>';
     }
 }

@@ -2,10 +2,10 @@
     <table class="table table-hover">
         <thead>
         <th>#</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Discount</th>
+        <th>@lang('vn.Name')</th>
+        <th>@lang('vn.Price')</th>
+        <th>@lang('vn.Quantity')</th>
+        <th>@lang('vn.Discount')</th>
         </thead>
         <tbody>
         @foreach($components as $key => $component)

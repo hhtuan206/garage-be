@@ -10,7 +10,7 @@ class Repair extends \Vanguard\Plugins\Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Repair'))
+        return Item::create(__('vn.Repair'))
             ->route('repairs.index')
             ->icon('fas fa-car')
             ->active("repairs*");

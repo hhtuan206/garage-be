@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('page-title', __('Repairs'))
-@section('page-heading', __('Repairs'))
+@section('page-title', __('vn.Repairs'))
+@section('page-heading', __('vn.Repairs'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
@@ -20,7 +20,7 @@
                     <div class="float-right">
                         <a href="{{ route('repairs.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add Repair')
+                            @lang('vn.Add Repair')
                         </a>
                     </div>
                 </div>
@@ -30,12 +30,12 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-100">@lang('Car')</th>
-                        <th class="min-width-150">@lang('Customer Name')</th>
-                        <th class="min-width-150">@lang('Services')</th>
-                        <th class="min-width-150">@lang('Total')</th>
-                        <th class="min-width-150">@lang('Repair At')</th>
-                        <th class="text-center">@lang('Action')</th>
+                        <th class="min-width-100">@lang('vn.Car')</th>
+                        <th class="min-width-150">@lang('vn.Customer Name')</th>
+                        <th class="min-width-150">@lang('vn.Services')</th>
+                        <th class="min-width-150">@lang('vn.Total')</th>
+                        <th class="min-width-150">@lang('vn.Repair At')</th>
+                        <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,17 +53,17 @@
                                 <td>{{ $repair->created_at }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('repairs.show', $repair) }}" class="btn btn-icon"
-                                       title="@lang('Edit Repair')" data-toggle="tooltip" data-placement="top">
+                                       title="@lang('vn.Edit Repair')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('repairs.destroy', $repair) }}" class="btn btn-icon"
-                                       title="@lang('Delete Repair')"
+                                       title="@lang('vn.Delete Repair')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
-                                       data-confirm-title="@lang('Please Confirm')"
-                                       data-confirm-text="@lang('Are you sure that you want to delete this history?')"
-                                       data-confirm-delete="@lang('Yes, delete it!')">
+                                       data-confirm-title="@lang('vn.Please Confirm')"
+                                       data-confirm-text="@lang('vn.Are you sure that you want to delete this history?')"
+                                       data-confirm-delete="@lang('vn.Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -71,7 +71,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="4"><em>@lang('No records found.')</em></td>
+                            <td colspan="4"><em>@lang('vn.No records found.')</em></td>
                         </tr>
                     @endif
                     </tbody>

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('page-title', __('Service'))
-@section('page-heading', $edit ? $service->name : __('Create New Service'))
+@section('page-title', __('vn.Service'))
+@section('page-heading', $edit ? $service->name : __('vn.Create New Service'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">
-        <a href="{{ route('services.index') }}">@lang('Service')</a>
+        <a href="{{ route('services.index') }}">@lang('vn.Service')</a>
     </li>
     <li class="breadcrumb-item active">
-        {{ __($edit ? 'Edit' : 'Create') }}
+        {{ __($edit ? 'vn.Edit' : 'vn.Create') }}
     </li>
 @stop
 
@@ -27,40 +27,40 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5 class="card-title">
-                        @lang('Service Details')
+                        @lang('vn.Service Details')
                     </h5>
                     <p class="text-muted">
-                        @lang('A general service information.')
+                        @lang('vn.A general service information.')
                     </p>
                 </div>
                 <div class="col-md-9">
                     <div class="form-group">
-                        <label for="name">@lang('Name')</label>
+                        <label for="name">@lang('vn.Name')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="name"
                                name="name"
-                               placeholder="@lang('Service Name')"
+                               placeholder="@lang('vn.Service Name')"
                                value="{{ $edit ? $service->name : old('name') }}">
                     </div>
                     <div class="form-group">
-                        <label for="price">@lang('Price')</label>
+                        <label for="price">@lang('vn.Price')</label>
                         <input type="text"
                                class="form-control input-solid"
                                id="price"
                                name="price"
-                               placeholder="@lang('Price')"
+                               placeholder="@lang('vn.Price')"
                                value="{{ $edit ? $service->price : old('price') }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="detail">@lang('Detail')</label>
+                        <label for="detail">@lang('vn.Detail')</label>
                         <textarea name="detail"
                                   id="detail"
                                   class="form-control input-solid">{{ $edit ? $service->detail : old('detail') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="status">@lang('Status')</label>
+                        <label for="status">@lang('vn.Status')</label>
                         {!! Form::select('status',[0=>'Deactivate',1=>"Active"],null,['class'=>'form-control input-solid']) !!}
                     </div>
                 </div>
@@ -69,7 +69,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update Service' : 'Create Service') }}
+        {{ __($edit ? 'vn.Update Service' : 'vn.Create Service') }}
     </button>
 
 @stop

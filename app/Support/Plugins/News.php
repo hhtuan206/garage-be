@@ -11,7 +11,7 @@ class News extends Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('News'))
+        return Item::create(__('vn.News'))
             ->route('news.index')
             ->icon('fas fa-newspaper')
             ->active("news*");

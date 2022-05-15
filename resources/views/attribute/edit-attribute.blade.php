@@ -17,18 +17,18 @@
             <div class="card">
                 {!! Form::open(['route' => ['attributes.update',$attribute],'method' => 'PUT', 'id' => 'option-form']) !!}
                 <div class="card-header">
-                    Attribute Information
+                    @lang('vn.Attribute Information')
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="name">@lang('Name')</label>
+                                <label for="name">@lang('vn.Name')</label>
                                 <input type="text"
                                        class="form-control input-solid"
                                        id="name"
                                        name="name"
-                                       placeholder="@lang('Attribute Name')"
+                                       placeholder="@lang('vn.Attribute Name')"
                                        value="{{$attribute->name}}">
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-primary">
-                        Save
+                        @lang('vn.Save')
                     </button>
                 </div>
                 {!! Form::close() !!}

@@ -32,6 +32,11 @@ class Component extends Model
         return $this->belongsToMany(Repair::class,'repair_component','component_id')->withPivot('quantity');
     }
 
+    public function getPricesAttribute()
+    {
+        return number_format($this->price,0);
+    }
+
     protected static function boot()
     {
         parent::boot();

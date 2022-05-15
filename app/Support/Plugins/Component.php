@@ -10,7 +10,7 @@ class Component extends \Vanguard\Plugins\Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Component'))
+        return Item::create(__('vn.Component'))
             ->route('components.index')
             ->icon('fas fa-compass')
             ->active("components*");

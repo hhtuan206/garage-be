@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title', __('Appointment'))
-@section('page-heading', __('Appointment'))
+@section('page-title', __('vn.Appointment'))
+@section('page-heading', __('vn.Appointment'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">
-        @lang('Appointment')
+        @lang('vn.Appointment')
     </li>
 @stop
 
@@ -28,7 +28,7 @@
                     <div class="float-right ">
                         <a href="{{ route('appointments.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
-                            @lang('Add Appointment')
+                            @lang('vn.Add Appointment')
                         </a>
                     </div>
                 </div>
@@ -38,37 +38,33 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-100">@lang('Customer')</th>
-                        <th class="min-width-150">@lang('Time')</th>
-                        <th class="min-width-150">@lang('Status')</th>
+                        <th class="min-width-100">@lang('vn.Customer')</th>
+                        <th class="min-width-150">@lang('vn.Time')</th>
+                        <th class="min-width-150">@lang('vn.Status')</th>
 
-                        <th class="text-center">@lang('Action')</th>
+                        <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if (count($news))
-                        @foreach ($news as $new)
+                    @if (count($appointments))
+                        @foreach ($appointments as $appointment)
                             <tr>
-                                <td>{{ $new->title }}</td>
-                                <td>{!!  \Illuminate\Support\Str::limit($new->content,$limit = 30, $end = '...') !!} </td>
-                                <td> <img
-                                    class="rounded-squares img-responsive"
-                                    width="40"
-                                    src="{{asset('new/'.$new->image_cover)}}"
-                                    alt="{!! $new->title  !!}"></td>
+                                <td>{{ $appointment->user->fullname }}</td>
+                                <td>{{$appointment->date_time}}</td>
+                                <td>{!! $appointment->statuss !!}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('news.edit', $new) }}" class="btn btn-icon"
-                                       title="@lang('Edit News')" data-toggle="tooltip" data-placement="top">
+                                    <a href="{{ route('appointments.edit', $appointment) }}" class="btn btn-icon"
+                                       title="@lang('vn.Edit News')" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('news.destroy', $new) }}" class="btn btn-icon"
-                                       title="@lang('Delete News')"
+                                    <a href="{{ route('appointments.destroy', $appointment) }}" class="btn btn-icon"
+                                       title="@lang('vn.Delete Appointment')"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-method="DELETE"
-                                       data-confirm-title="@lang('Please Confirm')"
-                                       data-confirm-text="@lang('Are you sure that you want to delete this service?')"
-                                       data-confirm-delete="@lang('Yes, delete it!')">
+                                       data-confirm-title="@lang('vn.Please Confirm')"
+                                       data-confirm-text="@lang('vn.Are you sure that you want to delete this appointment?')"
+                                       data-confirm-delete="@lang('vn.Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -77,7 +73,7 @@
 
                     @else
                         <tr>
-                            <td colspan="4"><em>@lang('No records found.')</em></td>
+                            <td colspan="4"><em>@lang('vn.No records found.')</em></td>
                         </tr>
                     @endif
                     </tbody>
@@ -85,7 +81,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-right">
-            {!! $news->links() !!}
+            {!! $appointments->links() !!}
         </div>
     </div>
 @stop
