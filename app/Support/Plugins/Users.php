@@ -9,7 +9,7 @@ class Users extends Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Users'))
+        return Item::create(__('Tài khoản'))
             ->route('users.index')
             ->icon('fas fa-users')
             ->active("users*")

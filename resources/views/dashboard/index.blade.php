@@ -13,6 +13,7 @@
     @include('partials.messages')
 
 <div class="row">
+{{--        {!! $appointmentChart->container() !!}--}}
     @foreach (\Vanguard\Plugins\Vanguard::availableWidgets(auth()->user()) as $widget)
         @if ($widget->width)
             <div class="col-md-{{ $widget->width }}">
@@ -32,4 +33,7 @@
             {!! app()->call([$widget, 'scripts']) !!}
         @endif
     @endforeach
+{{--@if($appointmentChart)--}}
+{{--    {!! $appointmentChart->script() !!}--}}
+{{--@endif--}}
 @stop

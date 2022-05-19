@@ -3,12 +3,12 @@
 /**
  * Authentication
  */
-Route::get('login', 'Auth\LoginController@show');
+Route::get('login', 'Auth\LoginController@show')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 Route::group(['middleware' => ['registration', 'guest']], function () {
-    Route::get('register', 'Auth\RegisterController@show');
+    Route::get('register', 'Auth\RegisterController@show')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
 });
 
@@ -232,8 +232,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 Route::get('/', 'Client\ClientController@index')->name('customer.home');
 Route::get('/appointment', 'Client\ClientController@appointment')->name('customer.appointment');
+Route::get('/view-appointment', 'Client\ClientController@appointment')->name('customer.viewAppointment');
 Route::get('/about', 'Client\ClientController@about')->name('customer.about');
 Route::get('/component', 'Client\ClientController@component')->name('customer.component');
 Route::get('/service', 'Client\ClientController@service')->name('customer.service');
 Route::get('/contact', 'Client\ClientController@contact')->name('customer.contact');
+Route::get('/profile', 'Client\ClientController@contact')->name('customer.profile');
+Route::post('/profile', 'Client\ClientController@contact')->name('customer.updateProfile');
+Route::get('/repair', 'Client\ClientController@contact')->name('customer.viewRepair');
 

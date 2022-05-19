@@ -40,9 +40,9 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             Site::class,
             \Vanguard\Support\Plugins\Users::class,
             \Vanguard\UserActivity\UserActivity::class,
-            \Vanguard\Support\Plugins\RolesAndPermissions::class,
-            \Vanguard\Support\Plugins\Settings::class,
-            \Vanguard\Announcements\Announcements::class,
+//            \Vanguard\Support\Plugins\RolesAndPermissions::class,
+//            \Vanguard\Support\Plugins\Settings::class,
+//            \Vanguard\Announcements\Announcements::class,
 
         ];
     }

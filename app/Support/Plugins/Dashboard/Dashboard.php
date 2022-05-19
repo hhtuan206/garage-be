@@ -9,7 +9,7 @@ class Dashboard extends Plugin
 {
     public function sidebar()
     {
-        return Item::create(__('Dashboard'))
+        return Item::create(__('Trang chủ'))
             ->route('dashboard')
             ->icon('fas fa-home')
             ->active("/");

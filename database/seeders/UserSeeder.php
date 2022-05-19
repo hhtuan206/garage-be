@@ -16,18 +16,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::where('name', 'Admin')->first();
-
-        User::create([
-            'first_name' => 'hht',
-            'email' => 'admin@example.com',
-            'username' => 'admin',
-            'password' => 'admin123',
-            'avatar' => null,
-            'country_id' => null,
-            'role_id' => $admin->id,
-            'status' => UserStatus::ACTIVE,
-            'email_verified_at' => now(),
-        ]);
+        User::factory()->count(30)->create();
+//        $admin = Role::where('name', 'User')->first();
+//
+//
+//        User::create([
+//            'first_name' => 'hht',
+//            'email' => 'admin@example.com',
+//            'username' => 'admin',
+//            'password' => 'admin123',
+//            'avatar' => null,
+//            'country_id' => null,
+//            'role_id' => $admin->id,
+//            'status' => UserStatus::ACTIVE,
+//            'email_verified_at' => now(),
+//        ]);
     }
 }

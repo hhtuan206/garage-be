@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="car">
-                        @include('vn.repair.partials.car')
+                        @include('repair.partials.car')
                         <div id="attribute-value" class=""></div>
                     </div>
                 </div>

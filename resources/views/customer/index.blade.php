@@ -10,11 +10,9 @@
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
                                 <div class="col-10 col-lg-7 text-center text-lg-start">
-                                    <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing
-                                        //</h6>
-                                    <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Repair
-                                        Service Center</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i
+                                    <h6 class="text-white text-uppercase mb-3 animated slideInDown"></h6>
+                                    <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Trung tâm sửa chữa {{config('app.name')}}</h1>
+                                    <a href="{{route('customer.about')}}" class="btn btn-primary py-3 px-5 animated slideInDown">Tìm hiểu thêm về chúng tôi<i
                                             class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
@@ -24,26 +22,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="{{asset('clients')}}/img/carousel-bg-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex align-items-center">
-                        <div class="container">
-                            <div class="row align-items-center justify-content-center justify-content-lg-start">
-                                <div class="col-10 col-lg-7 text-center text-lg-start">
-                                    <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing
-                                        //</h6>
-                                    <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Wash
-                                        Service Center</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i
-                                            class="fa fa-arrow-right ms-3"></i></a>
-                                </div>
-                                <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{asset('clients')}}/img/carousel-2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="carousel-item">--}}
+{{--                    <img class="w-100" src="{{asset('clients')}}/img/carousel-bg-2.jpg" alt="Image">--}}
+{{--                    <div class="carousel-caption d-flex align-items-center">--}}
+{{--                        <div class="container">--}}
+{{--                            <div class="row align-items-center justify-content-center justify-content-lg-start">--}}
+{{--                                <div class="col-10 col-lg-7 text-center text-lg-start">--}}
+{{--                                    <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing--}}
+{{--                                        //</h6>--}}
+{{--                                    <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Wash--}}
+{{--                                        Service Center</h1>--}}
+{{--                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i--}}
+{{--                                            class="fa fa-arrow-right ms-3"></i></a>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-lg-5 d-none d-lg-flex animated zoomIn">--}}
+{{--                                    <img class="img-fluid" src="{{asset('clients')}}/img/carousel-2.png" alt="">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                     data-bs-slide="prev">
