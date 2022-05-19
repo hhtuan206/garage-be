@@ -37,6 +37,11 @@ class Component extends Model
         return number_format($this->price,0);
     }
 
+    public function getCategoryNameAttribute()
+    {
+        return $this->category->name;
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -109,7 +109,7 @@ class EloquentUser implements UserRepository
         }
 
         $result = $query->orderBy('id', 'desc')
-            ->paginate($perPage);
+            ->simplePaginate($perPage);
 
         if ($search) {
             $result->appends(['search' => $search]);

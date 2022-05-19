@@ -219,6 +219,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('repairs', 'Backend\RepairController');
     Route::resource('appointments', 'Backend\AppointmentController');
     Route::resource('site', 'Backend\SiteController');
+    Route::resource('categories', 'Backend\CategoryController');
 
     Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
         Route::get('/', 'ImportController@index')->name('imports.index');

@@ -30,8 +30,8 @@ class Appointment extends Model
     public function getStatussAttribute()
     {
         if ($this->status == 'Waiting') {
-            return '<label for="" class="badge badge-primary">' . $this->status . '</label>';
+            return '<label for="" class="badge badge-primary">Đang chờ</label>';
         }
-        return '<label for="" class="badge badge-info">' . $this->status . '</label>';
+        return '<label for="" class="badge badge-info">Xác nhận</label>';
     }
 }

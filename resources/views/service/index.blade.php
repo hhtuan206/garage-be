@@ -77,7 +77,7 @@
                             <tr>
                                 <td>{{$key}}</td>
                                 <td>{{ $service->name }}</td>
-                                <td>{{ $service->prices }}</td>
+                                <td>{{ $service->prices }}đ</td>
                                 <td>{!!  \Illuminate\Support\Str::limit($service->detail,$limit = 30, $end = '...') !!} </td>
                                 <td><label for=""
                                            class="badge badge-info">{{ $service->status ? 'Hoạt động': 'Dừng hoạt động' }}</label>

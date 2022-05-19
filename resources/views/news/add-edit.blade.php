@@ -50,8 +50,29 @@
                                   class="form-control input-solid">{{ $edit ? $news->content : old('content') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>@lang('vn.Image Cover')</label>
-                        <input type="file" class="form-control"  name="image_cover" id="image_cover">
+                        <label for="detail">Thể loại</label>
+                        {!! Form::select('category_id',$categories, $news->category_id ?? '',['class'=> 'form-control input-solid']) !!}
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                @if($edit)
+                                    <img src="{{asset('new/'. $news->image )}}" width="75px" height="75px"
+                                         alt="">
+                                @else
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Tải lên</span>
+                                @endif
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                       aria-describedby="inputGroupFileAddon01" name="image">
+                                <label class="custom-file-label" id="display" for="inputGroupFile01">Chọn tệp</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+
                     </div>
                 </div>
             </div>

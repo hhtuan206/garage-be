@@ -24,19 +24,26 @@ class News extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function getCategoryNameAttribute()
+    {
+        return $this->category->name;
+    }
+
+
+
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($news) {
             if ($news->image instanceof UploadedFile) {
-                $news->image = UploadImageTrait::upload($news->image_cover,'new');
+                $news->image = UploadImageTrait::upload($news->image, 'new');
             }
         });
 
         static::updating(function ($news) {
             if ($news->image instanceof UploadedFile) {
-                $news->image = UploadImageTrait::upload($news->image_cover,'new');
+                $news->image = UploadImageTrait::upload($news->image, 'new');
             }
         });
 

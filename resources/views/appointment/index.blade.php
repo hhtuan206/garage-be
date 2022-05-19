@@ -38,23 +38,28 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th class="min-width-100">@lang('vn.Customer')</th>
                         <th class="min-width-150">@lang('vn.Time')</th>
                         <th class="min-width-150">@lang('vn.Status')</th>
-
                         <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
                     @if (count($appointments))
-                        @foreach ($appointments as $appointment)
+                        @foreach ($appointments as $key => $appointment)
                             <tr>
+                               <td>{{$key}}</td>
                                 <td>{{ $appointment->user->fullname }}</td>
                                 <td>{{$appointment->date_time}}</td>
                                 <td>{!! $appointment->statuss !!}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('appointments.edit', $appointment) }}" class="btn btn-icon"
-                                       title="@lang('vn.Edit News')" data-toggle="tooltip" data-placement="top">
+                                    <a href="{{ route('repairs.create', ['user_id' =>$appointment->user_id]) }}"
+                                       class="btn btn-icon"
+                                       title="Sửa chữa" data-toggle="tooltip" data-placement="top">
+                                        <i class="fab fa-accusoft"></i>
+                                    </a><a href="{{ route('appointments.edit', $appointment) }}" class="btn btn-icon"
+                                           title="Cập nhật đặt lịch" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('appointments.destroy', $appointment) }}" class="btn btn-icon"

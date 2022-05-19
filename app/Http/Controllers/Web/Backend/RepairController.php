@@ -22,7 +22,7 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repairs = Repair::simplePaginate(12);
+        $repairs = Repair::orderBy('id','desc')->simplePaginate(12);
         return view('repair.index', compact('repairs'));
     }
 
@@ -36,12 +36,18 @@ class RepairController extends Controller
         $attributes = Attribute::all()->pluck('name', 'id');
         $services = Service::all()->pluck('name', 'id');
         $components = Component::all()->pluck('name', 'id');
-        return view('repair.add-edit', [
+        if (\request()->user_id != null) {
+            $user = User::findOrFail(\request()->user_id);
+        }
+        $data = [
             'edit' => false,
             'attributes' => $attributes,
             'services' => $services,
             'components' => $components,
-        ]);
+            'customer' => $user ?? null,
+        ];
+
+        return view('repair.add-edit', $data);
     }
 
     /**
@@ -88,12 +94,12 @@ class RepairController extends Controller
                 'total_price' => (string)$this->calculateTotal($request->services, $request->components, $request->quantities)
             ]);
             $repair->services()->sync($request->services);
-            if (count($request->components) > 1){
+            if (count($request->components) > 1) {
                 foreach ($request->components as $key => $component) {
 
                     $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
                 }
-            }else {
+            } else {
 
                 $repair->components()->attach([$request->components => ['quantity' => $request->quantities[0]]]);
             }
@@ -111,7 +117,7 @@ class RepairController extends Controller
      */
     public function show(Repair $repair)
     {
-        return view('invoice.index',compact('repair'));
+        return view('invoice.index', compact('repair'));
     }
 
 

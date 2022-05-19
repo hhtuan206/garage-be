@@ -30,6 +30,7 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th class="min-width-100">@lang('vn.Car')</th>
                         <th class="min-width-150">@lang('vn.Customer Name')</th>
                         <th class="min-width-150">@lang('vn.Services')</th>
@@ -40,8 +41,9 @@
                     </thead>
                     <tbody>
                     @if (count($repairs))
-                        @foreach ($repairs as $repair)
+                        @foreach ($repairs as $key => $repair)
                             <tr>
+                                <td>{{$key}}</td>
                                 <td>{{ $repair->car->number_plate }}</td>
                                 <td>{{ $repair->user->fullname}}</td>
                                 <td>
@@ -49,7 +51,7 @@
                                         <label class="badge badge-info">{{$service->name}}</label>
                                     @endforeach
                                     </td>
-                                <td>{{ $repair->total_price}}</td>
+                                <td>{{ number_format($repair->total_price,0)}}đ</td>
                                 <td>{{ $repair->created_at }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('repairs.show', $repair) }}" class="btn btn-icon"

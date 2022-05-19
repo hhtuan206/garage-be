@@ -19,7 +19,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::simplePaginate(6);
+        $appointments = Appointment::orderBy('id','desc')->simplePaginate(6);
         return view('appointment.index', compact('appointments'));
     }
 

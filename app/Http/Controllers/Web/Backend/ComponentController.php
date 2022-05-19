@@ -4,6 +4,7 @@ namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Category;
 use Vanguard\Models\Component;
 
 class ComponentController extends Controller
@@ -18,7 +19,7 @@ class ComponentController extends Controller
     public function index()
     {
 
-        $components = Component::simplePaginate(6);
+        $components = Component::orderBy('id','desc')->simplePaginate(6);
         return view('component.index', compact('components'));
     }
 
@@ -29,7 +30,8 @@ class ComponentController extends Controller
      */
     public function create()
     {
-        return view('component.add-edit', ['edit' => false]);
+        $categories = Category::where('type','component')->get()->pluck('name','id');
+        return view('component.add-edit', ['edit' => false, 'categories' => $categories]);
     }
 
     /**
@@ -64,7 +66,8 @@ class ComponentController extends Controller
      */
     public function edit(Component $component)
     {
-        return view('component.add-edit', ['edit' => true, 'component' => $component]);
+        $categories = Category::where('type','component')->get()->pluck('name','id');
+        return view('component.add-edit', ['edit' => true, 'component' => $component,'categories' => $categories]);
     }
 
     /**

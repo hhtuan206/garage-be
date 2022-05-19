@@ -44,6 +44,7 @@
                         <th class="min-width-150">@lang('vn.Unit')</th>
                         <th class="min-width-150">@lang('vn.Detail')</th>
                         <th class="min-width-150">@lang('vn.Stock')</th>
+                        <th class="min-width-150">Thể loại</th>
                         <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
@@ -54,10 +55,11 @@
                                 <td><img src="{{asset('component/'.$component->image)}}" alt="" width="75px"
                                          height="75px"></td>
                                 <td>{{ $component->name }}</td>
-                                <td>{{ $component->prices }}</td>
+                                <td>{{ $component->prices }}đ</td>
                                 <td>{{ $component->unit }}</td>
                                 <td>{!!  \Illuminate\Support\Str::limit($component->description,$limit = 30, $end = '...') !!} </td>
                                 <td>{{ $component->stock ?? 'Hết hàng' }}</td>
+                                <td>{{$component->category_name}}</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-icon"
                                        title="@lang('Cập nhật tồn kho')" data-toggle="modal"

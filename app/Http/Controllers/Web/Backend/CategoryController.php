@@ -4,6 +4,7 @@ namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('id','desc')->simplePaginate(6);
+        return view('category.index',['categories' => $categories]);
     }
 
     /**
@@ -35,7 +37,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
+        return redirect()->route('categories.index')
+            ->withSuccess(__('Tạo thể loại thành công.'));
     }
 
     /**
@@ -55,9 +59,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -67,9 +71,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        Category::find($category->id)->update($request->all());
+        return redirect()->route('categories.index')
+            ->withSuccess(__('Cập nhật thể loại thành công.'));
     }
 
     /**

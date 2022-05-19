@@ -40,8 +40,8 @@
                     <tr>
                         <th class="min-width-100">@lang('vn.Title')</th>
                         <th class="min-width-150">@lang('vn.Content')</th>
+                        <th class="min-width-150">Thể loại</th>
                         <th class="min-width-150">@lang('vn.Image Cover')</th>
-
                         <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
@@ -51,11 +51,9 @@
                             <tr>
                                 <td>{{ $new->title }}</td>
                                 <td>{!!  \Illuminate\Support\Str::limit($new->content,$limit = 30, $end = '...') !!} </td>
-                                <td> <img
-                                    class="rounded-squares img-responsive"
-                                    width="40"
-                                    src="{{asset('new/'.$new->image_cover)}}"
-                                    alt="{!! $new->title  !!}"></td>
+                                <td>{{$new->category_name}}</td>
+                                <td> <img src="{{asset('new/'. $new->image )}}" width="75px" height="75px"
+                                          alt=""></td>
                                 <td class="text-center">
                                     <a href="{{ route('news.edit', $new) }}" class="btn btn-icon"
                                        title="@lang('vn.Edit News')" data-toggle="tooltip" data-placement="top">

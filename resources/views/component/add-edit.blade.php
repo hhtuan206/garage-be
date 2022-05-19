@@ -77,6 +77,10 @@
                                   class="form-control input-solid">{{ $edit ? $component->description : old('description') }}</textarea>
                     </div>
                     <div class="form-group">
+                        <label for="detail">Thể loại</label>
+                        {!! Form::select('category_id',$categories, $component->category_id ?? '',['class'=> 'form-control input-solid']) !!}
+                    </div>
+                    <div class="form-group">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 @if($edit)
