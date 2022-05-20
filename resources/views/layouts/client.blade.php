@@ -32,6 +32,9 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('clients')}}/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -77,9 +80,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="/" class="nav-item nav-link active">Trang chủ</a>
-            <a href="/about" class="nav-item nav-link">Giới thiệu</a>
-            <a href="service.html" class="nav-item nav-link">Dịch vụ</a>
-            <a href="service.html" class="nav-item nav-link">Linh kiện</a>
+            <a href="{{route('customer.about')}}" class="nav-item nav-link">Giới thiệu</a>
+            <a href="{{route('customer.service')}}" class="nav-item nav-link">Dịch vụ</a>
+            <a href="{{route('customer.component')}}" class="nav-item nav-link">Linh kiện</a>
 
             @if(Auth::check())
                 <div class="nav-item dropdown">

@@ -33,7 +33,7 @@
                         <th>#</th>
                         <th class="min-width-100">@lang('vn.Car')</th>
                         <th class="min-width-150">@lang('vn.Customer Name')</th>
-                        <th class="min-width-150">@lang('vn.Services')</th>
+                        <th class="min-width-150">Dịch vụ sử dụng</th>
                         <th class="min-width-150">@lang('vn.Total')</th>
                         <th class="min-width-150">@lang('vn.Repair At')</th>
                         <th class="text-center">@lang('vn.Action')</th>

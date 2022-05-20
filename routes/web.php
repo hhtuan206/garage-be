@@ -232,13 +232,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/', 'Client\ClientController@index')->name('customer.home');
-Route::get('/appointment', 'Client\ClientController@appointment')->name('customer.appointment');
-Route::get('/view-appointment', 'Client\ClientController@appointment')->name('customer.viewAppointment');
+Route::get('/appointment', 'Client\AppointmentController@index')->name('customer.appointment');
 Route::get('/about', 'Client\ClientController@about')->name('customer.about');
-Route::get('/component', 'Client\ClientController@component')->name('customer.component');
-Route::get('/service', 'Client\ClientController@service')->name('customer.service');
+Route::get('/components', 'Client\ClientController@component')->name('customer.component');
+Route::get('/services', 'Client\ClientController@service')->name('customer.service');
 Route::get('/contact', 'Client\ClientController@contact')->name('customer.contact');
-Route::get('/profile', 'Client\ClientController@contact')->name('customer.profile');
-Route::post('/profile', 'Client\ClientController@contact')->name('customer.updateProfile');
-Route::get('/repair', 'Client\ClientController@contact')->name('customer.viewRepair');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', 'Client\UsersController@index')->name('customer.profile');
+    Route::put('/profile/{user}', 'Client\UsersController@update')->name('customer.updateProfile');
+    Route::get('/repair', 'Client\UsersController@repair')->name('customer.viewRepair');
+    Route::get('/appointments', 'Client\AppointmentController@history')->name('customer.viewAppointment');
+});
+
+
 

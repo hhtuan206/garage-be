@@ -12,6 +12,7 @@ use Mail;
 use Vanguard\Events\User\RequestedPasswordResetEmail;
 use Vanguard\Models\Appointment;
 use Vanguard\Models\Car;
+use Vanguard\Models\Repair;
 use Vanguard\Presenters\Traits\Presentable;
 use Vanguard\Presenters\UserPresenter;
 use Vanguard\Services\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatable;
@@ -124,6 +125,11 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
     public function appointment()
     {
         return $this->hasMany(Appointment::class, 'user_id');
+    }
+
+    public function repairs()
+    {
+        return $this->hasMany(Repair::class,'user_id');
     }
 
     public function getFullNameAttribute()
