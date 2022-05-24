@@ -33,6 +33,16 @@ class Repair extends Model
         return $this->belongsTo(Car::class);
     }
 
+    public function getTotalAttribute()
+    {
+        return number_format($this->total_price,0);
+    }
+
+    public function getDateRepairAttribute()
+    {
+        return date('d-m-Y',strtotime($this->created_at));
+    }
+
     protected static function boot()
     {
         parent::boot();

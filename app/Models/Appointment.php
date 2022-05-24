@@ -27,6 +27,11 @@ class Appointment extends Model
         return $this->date . " " . $this->time;
     }
 
+    public function getDateCreateAttribute()
+    {
+        return date('d-m-Y',strtotime($this->created_at));
+    }
+
     public function getStatussAttribute()
     {
         if ($this->status == 'Waiting') {

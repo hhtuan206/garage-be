@@ -14,9 +14,9 @@
 
 @section('content')
 
-@include('partials.messages')
+    @include('partials.messages')
 
-{!! Form::open(['route' => 'users.store', 'files' => true, 'id' => 'user-form']) !!}
+    {!! Form::open(['route' => 'users.store', 'files' => true, 'id' => 'user-form']) !!}
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -58,11 +58,14 @@
             <button type="submit" class="btn btn-primary">
                 @lang('Create User')
             </button>
+            <a class="btn btn-primary" href="{{route('cars.create')}}">
+                @lang('Thêm Xe')
+            </a>
         </div>
     </div>
-{!! Form::close() !!}
+    {!! Form::close() !!}
 
-<br>
+    <br>
 @stop
 
 @section('scripts')

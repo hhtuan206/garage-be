@@ -129,8 +129,9 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
 
     public function repairs()
     {
-        return $this->hasMany(Repair::class,'user_id');
+        return $this->hasMany(Repair::class, 'user_id');
     }
+
 
     public function getFullNameAttribute()
     {

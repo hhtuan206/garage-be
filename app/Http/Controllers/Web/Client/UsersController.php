@@ -25,8 +25,13 @@ class UsersController extends Controller
 
     public function repair()
     {
-        $repairs = \Auth::user()->repairs;
+        $repairs = \Auth::user()->repairs->sortByDesc('created_at');
         return view('customer.repair',compact('repairs'));
+    }
+
+    public function invoice()
+    {
+
     }
 
 }

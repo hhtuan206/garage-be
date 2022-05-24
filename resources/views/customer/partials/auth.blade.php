@@ -1,5 +1,5 @@
-<div class="form-group">
-    <label for="email">@lang('Email')</label>
+<div class="mb-3">
+    <label for="email" class="form-label">@lang('Email')</label>
     <input type="email"
            class="form-control input-solid"
            id="email"
@@ -8,8 +8,8 @@
            value="{{ $edit ? $user->email : '' }}">
 </div>
 
-<div class="form-group">
-    <label for="username">@lang('Username')</label>
+<div class="mb-3">
+    <label for="username" class="form-label">@lang('Username')</label>
     <input type="text"
            class="form-control input-solid"
            id="username"
@@ -18,8 +18,8 @@
            value="{{ $edit ? $user->username : '' }}">
 </div>
 
-<div class="form-group">
-    <label for="password">{{ $edit ? __("New Password") : __('Password') }}</label>
+<div class="mb-3">
+    <label for="password" class="form-label">{{ $edit ? __("New Password") : __('Password') }}</label>
     <input type="password"
            class="form-control input-solid"
            id="password"
@@ -27,8 +27,8 @@
            @if ($edit) placeholder="@lang("Leave field blank if you don't want to change it")" @endif>
 </div>
 
-<div class="form-group">
-    <label for="password_confirmation">{{ $edit ? __("Confirm New Password") : __('Confirm Password') }}</label>
+<div class="mb-3">
+    <label for="password_confirmation" class="form-label">{{ $edit ? __("Confirm New Password") : __('Confirm Password') }}</label>
     <input type="password"
            class="form-control input-solid"
            id="password_confirmation"

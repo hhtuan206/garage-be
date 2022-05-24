@@ -192,6 +192,7 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('clients')}}/js/main.js"></script>
+@yield('scripts')
 </body>
 
 </html>

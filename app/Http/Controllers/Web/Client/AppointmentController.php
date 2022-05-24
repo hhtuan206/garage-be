@@ -22,7 +22,7 @@ class AppointmentController extends Controller
 
     public function history()
     {
-        $appointments = \Auth::user()->appointment;
+        $appointments = \Auth::user()->appointment->sortByDesc('created_at');
         return view('customer.appointment.list', compact('appointments'));
     }
 }

@@ -22,7 +22,7 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repairs = Repair::orderBy('id','desc')->simplePaginate(12);
+        $repairs = Repair::orderBy('id', 'desc')->simplePaginate(12);
         return view('repair.index', compact('repairs'));
     }
 
@@ -36,6 +36,7 @@ class RepairController extends Controller
         $attributes = Attribute::all()->pluck('name', 'id');
         $services = Service::all()->pluck('name', 'id');
         $components = Component::all()->pluck('name', 'id');
+        $users = User::all()->pluck('info', 'id');
         if (\request()->user_id != null) {
             $user = User::findOrFail(\request()->user_id);
         }
@@ -44,7 +45,7 @@ class RepairController extends Controller
             'attributes' => $attributes,
             'services' => $services,
             'components' => $components,
-            'customer' => $user ?? null,
+            'users' => $users,
         ];
 
         return view('repair.add-edit', $data);
@@ -58,53 +59,25 @@ class RepairController extends Controller
      */
     public function store(Request $request)
     {
-
-        $full_name = $this->parseName($request->full_name);
-        $user = User::updateOrCreate(['phone' => $request->phone], [
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'first_name' => $full_name->first_name,
-            'last_name' => $full_name->last_name,
-            'address' => $request->address ?? "",
-            'role_id' => Role::where('name', 'User')->first()->id,
-            'status' => 'ACTIVE',
+        $total_price = null;
+        $repair = Repair::create([
+            'car_id' => $request->car_id,
+            'user_id' => $request->user_id,
+            'total_price' => 0,
         ]);
 
-        $car = Car::updateOrCreate(['number_plate' => $request->number_plate], [
-            'number_plate' => $request->number_plate,
-            'engine_number' => $request->engine_number,
-            'user_id' => $user->id,
-        ]);
-
-        if ($request->has('attribute')) {
-            $car->attributes()->sync($request->attribute);
-            if (count($request->attribute) > 1) {
-                foreach ($request->attribute as $key => $attribute) {
-                    $car->values()->sync([$request->values[$key] => ['attribute_id' => $attribute]]);
-                }
-            } else {
-                $car->values()->sync([$request->values => ['attribute_id' => $request->attributes[0]]]);
-            }
-        }
-
-        if ($request->has('services') && $request->has('components')) {
-            $repair = Repair::create([
-                'car_id' => $car->id,
-                'user_id' => $user->id,
-                'total_price' => (string)$this->calculateTotal($request->services, $request->components, $request->quantities)
-            ]);
+        if ($request->has('services')) {
+            $total_price += (int)$this->calculateTotal($request->services, null, null);
             $repair->services()->sync($request->services);
-            if (count($request->components) > 1) {
-                foreach ($request->components as $key => $component) {
-
-                    $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
-                }
-            } else {
-
-                $repair->components()->attach([$request->components => ['quantity' => $request->quantities[0]]]);
-            }
         }
-
+        if ($request->has('components')) {
+            foreach ($request->components as $key => $component) {
+                $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
+            }
+            $total_price += (int)$this->calculateTotal(null, $request->components, $request->quantities);
+        }
+        $repair->total_price = $total_price;
+        $repair->save();
         return redirect()->route('repairs.index')
             ->withSuccess(__('Repair created successfully.'));
     }
@@ -145,23 +118,31 @@ class RepairController extends Controller
 
     public function calculateTotal($services, $components, $quatities)
     {
-
         $total = null;
-        if (count($components) > 1) {
-            foreach (Component::find($components) as $key => $item) {
-                $total += $item->price * $quatities[$key];
+        if ($components != null && $quatities != null) {
+            if (count($components) > 1) {
+                foreach (Component::find($components) as $key => $item) {
+                    $total += $item->price * $quatities[$key];
+                }
+            } else {
+                $total += (int)Component::find($components)->first()->price * $quatities[0];
             }
-        } else {
-            $total += Component::find($components)->first()->price * $quatities;
         }
-        if (count($services) > 1) {
-            foreach (Service::find($services) as $item) {
-                $total += $item->price;
+        if ($services != null) {
+            if (count($services) > 1) {
+                foreach (Service::find($services) as $item) {
+                    $total += (int)$item->price;
+                }
+            } else {
+                $total += (int)Service::find($services)->first()->price;
             }
-        } else {
-            $total += Service::find($services)->first()->price;
         }
-
         return $total;
+    }
+
+    public function getCar(Request $request)
+    {
+        $cars = Car::where('user_id', $request->id)->pluck('number_plate', 'id');
+        return view('repair.partials.car', compact('cars'));
     }
 }

@@ -220,6 +220,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('appointments', 'Backend\AppointmentController');
     Route::resource('site', 'Backend\SiteController');
     Route::resource('categories', 'Backend\CategoryController');
+    Route::resource('cars', 'Backend\CarController');
 
     Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
         Route::get('/', 'ImportController@index')->name('imports.index');
@@ -245,5 +246,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/appointments', 'Client\AppointmentController@history')->name('customer.viewAppointment');
 });
 
+Route::get('/detailComponent/{id}', 'Client\ClientController@getDetailComponent')->name('detail.com');
+Route::post('/getCar', 'Backend\RepairController@getCar')->name('getCar');
 
 

@@ -35,7 +35,8 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="exist">
-                        @include('repair.partials.customer')
+                        {{--                        @include('repair.partials.customer')--}}
+                        {!! Form::select('user_id',$users,null,['class'=>'form-control input-solid','id' => 'user']) !!}
                     </div>
 
                 </div>
@@ -56,8 +57,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="car">
-                        @include('repair.partials.car')
-                        <div id="attribute-value" class=""></div>
+                        <div id="car_show" class=""></div>
                     </div>
                 </div>
 
@@ -117,27 +117,19 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('input[name=phone]').change(function () {
+            $('#user').change(function () {
                 console.log($(this).val())
-                if ($('#phone').val() !== null) {
-                    $.ajax({
-                        url: '{{route('findCustomer')}}',
-                        type: 'post',
-                        data: {
-                            'phone': $(this).val()
-                        }
-                    }).done(function (res) {
-                        console.log(res)
-                        if (!jQuery.isEmptyObject(res)) {
-                            console.log(res)
-                            $('#full_name').val(res.full_name);
-                            $('#email').val(res.email);
-                            $('#engine_number').val(res.engine_number);
-                            $('#number_plate').val(res.number_plate);
-                            $('#attribute').val(res.attributes).trigger('change');
-                        }
-                    })
-                }
+                $.ajax({
+                    url: '{{route('getCar')}}',
+                    type: 'post',
+                    data: {
+                        'id': $(this).val()
+                    }
+                }).done(function (res) {
+                    console.log(res)
+                    $('#car_show').html(res)
+                })
+
             })
             $('#component').on('change', function () {
                 console.log($(this).val()
@@ -153,24 +145,9 @@
                     }
                 })
             })
-
-            $('#attribute').on('change', function () {
-                console.log($(this).val()
-                )
-                $.ajax({
-                    url: '{{route("render-attribute")}}',
-                    type: "post",
-                    data: {
-                        'attribute': $(this).val()
-                    },
-                    success: function (res) {
-                        $('#attribute-value').html(res)
-                    }
-                })
-            })
             $('#service').select2();
             $('#component').select2();
-            $('#attribute').select2();
+
 
         })
     </script>
