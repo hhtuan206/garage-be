@@ -16,10 +16,25 @@ class ComponentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $components = Component::orderBy('id','desc')->simplePaginate(6);
+        $query = Component::query();
+        if ($request->has('stock') && $request->stock != '') {
+            switch ($request->stock) {
+                case 0:
+                    break;
+                case 1:
+                    $query->where('stock', '>', 0);
+                    break;
+                case 2:
+                    $query->where('stock', '=', 0);
+                    break;
+            }
+        }
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', $request->search);
+        }
+        $components = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('component.index', compact('components'));
     }
 

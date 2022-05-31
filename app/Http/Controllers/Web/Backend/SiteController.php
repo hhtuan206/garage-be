@@ -37,10 +37,12 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        Site::find(1)->update(['content' => $request->logo ?? '']);
-        Site::find(2)->update(['content' => $request->email ?? '']);
-        Site::find(3)->update(['content' => $request->phone ?? '']);
-        Site::find(4)->update(['content' => $request->address ?? '']);
+        foreach ($request->except('_token') as $type => $content) {
+            $site = Site::where('type', $type)->first();
+            $site->content = $content;
+            $site->save();
+
+        }
         return redirect()->route('site.index')
             ->withSuccess(__('Site config update successfully.'));
     }

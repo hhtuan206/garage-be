@@ -71,7 +71,7 @@
                                value="{{ $edit ? $component->stock : old('stock') }}">
                     </div>
                     <div class="form-group">
-                        <label for="detail">@lang('vn.Description')</label>
+                        <label for="detail">@lang('Mô tả')</label>
                         <textarea name="description"
                                   id="description"
                                   class="form-control input-solid">{{ $edit ? $component->description : old('description') }}</textarea>

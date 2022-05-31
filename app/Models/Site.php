@@ -18,9 +18,12 @@ class Site extends Model
         parent::boot();
 
         static::updating(function ($site) {
-            if ($site->content instanceof UploadedFile) {
-                $site->content = UploadImageTrait::upload($site->content, 'upload');
+            if ($site->type == 'logo') {
+                if ($site->content instanceof UploadedFile) {
+                    $site->content = UploadImageTrait::upload($site->content, 'upload');
+                }
             }
+
         });
     }
 }

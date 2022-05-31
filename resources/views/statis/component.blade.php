@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('style')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+@endsection
 @section('page-title', __('vn.Components'))
 @section('page-heading', __('vn.Components'))
 
@@ -39,19 +41,17 @@
                     <div class="col-md-3 mt-md-0 mt-2">
                         {!! Form::select('stock',[0 => 'Tất cả',1 => 'Tồn kho',2=>'Hết hàng'],Request::get('stock'),['class' => 'form-control input-solid','id' => 'stock']) !!}
                     </div>
-
                     <div class="col-md-6 text-right">
-                        <a href="{{ route('components.create') }}" class="btn btn-primary btn-rounded">
-                            <i class="fas fa-plus mr-2"></i>
-                            @lang('vn.Add Component')
-                        </a>
+                        <button type="submit" class="btn btn-primary btn-rounded float-right">
+                            <i class="fas fa-search"></i>
+                            @lang('Tìm kiếm')
+                        </button>
                     </div>
                 </div>
             </form>
 
-
             <div class="table-responsive" id="users-table-wrapper">
-                <table class="table table-striped table-borderless">
+                <table class="table table-striped table-borderless" id="myTable">
                     <thead>
                     <tr>
                         <th class="min-width-100">@lang('vn.Image')</th>
@@ -61,7 +61,6 @@
                         <th class="min-width-150">@lang('vn.Detail')</th>
                         <th class="min-width-150">@lang('vn.Stock')</th>
                         <th class="min-width-150">Thể loại</th>
-                        <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -76,28 +75,6 @@
                                 <td>{!!  \Illuminate\Support\Str::limit($component->description,$limit = 30, $end = '...') !!} </td>
                                 <td>{{ $component->stock ?? 'Hết hàng' }}</td>
                                 <td>{{$component->category_name}}</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-icon"
-                                       title="@lang('Cập nhật tồn kho')" data-toggle="modal"
-                                       data-target="#exampleModal" data-whatever="{{$component->id}}">
-                                        <i class="fas fa-layer-group"></i>
-                                    </a>
-                                    <a href="{{ route('components.edit', $component) }}" class="btn btn-icon"
-                                       title="@lang('vn.Edit Component')" data-toggle="tooltip"
-                                       data-placement="top">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="{{ route('components.destroy', $component) }}" class="btn btn-icon"
-                                       title="@lang('vn.Delete Component')"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       data-method="DELETE"
-                                       data-confirm-title="@lang('vn.Please Confirm')"
-                                       data-confirm-text="@lang('vn.Are you sure that you want to delete this component?')"
-                                       data-confirm-delete="@lang('vn.Yes, delete it!')">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
                             </tr>
                         @endforeach
 
@@ -111,23 +88,16 @@
             </div>
         </div>
         <div class="card-footer text-muted text-right">
-            {!! $components->links() !!}
         </div>
     </div>
-    @include('component.modal.updateStock')
 @stop
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var id = button.data('whatever') // Extract info from data-* attributes
-                $('#update-stock').attr('action', "updateStock/" + id)
-            })
             $('#stock').on('change', function () {
                 $('#users-form').submit()
             })
         })
-
     </script>
 @endsection
+

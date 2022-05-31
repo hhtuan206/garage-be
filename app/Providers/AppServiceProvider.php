@@ -34,9 +34,9 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Database\Schema\Builder::defaultStringLength(191);
 
         Factory::guessFactoryNamesUsing(function (string $modelName) {
-            return 'Database\Factories\\'.class_basename($modelName).'Factory';
+            return 'Database\Factories\\' . class_basename($modelName) . 'Factory';
         });
-        View::share('site', new Fluent(Site::all()));
+        View::share('site', new Fluent(Site::all()->pluck('content', 'type')));
     }
 
     /**

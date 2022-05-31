@@ -29,9 +29,9 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <label for="name">@lang('vn.Logo')</label>
-                        @if($site[0]->content)
+                        @if($site->logo)
                             <br>
-                            <img src="{{asset('upload/'.$site[0]->content)}}" alt="" width="100">
+                            <img src="{{asset('upload/'.$site->logo)}}" alt="" width="100">
                         @endif
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01"
@@ -46,7 +46,7 @@
                                class="form-control input-solid"
                                name="email"
                                placeholder="@lang('vn.Email')"
-                               value="{{ $site[1]->content }}">
+                               value="{{ $site->email }}">
                     </div>
                     <div class="form-group">
                         <label for="description">@lang('vn.Phone')</label>
@@ -54,12 +54,32 @@
                                class="form-control input-solid"
                                name="phone"
                                placeholder="@lang('vn.Phone')"
-                               value="{{ $site[2]->content }}">
+                               value="{{ $site->phone }}">
                     </div>
                     <div class="form-group">
                         <label for="address">@lang('vn.Address')</label>
                         <textarea name="address" id="" cols="12" rows="3"
-                                  class="form-control input-solid">{{ $site[3]->content }}</textarea>
+                                  class="form-control input-solid">{{ $site->address }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">@lang('Giờ làm việc')</label>
+                        <textarea name="open_hour" id="" cols="12" rows="3"
+                                  class="form-control input-solid">{{ $site->open_hour }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex align-items-center">
+                            <div class="ml-3 d-flex flex-column">
+                                <label class="mb-0">@lang('Đặt lịch')</label>
+                                <small class="pt-0 text-muted">
+                                    @lang('Bật tắt đặt lịch.')
+                                </small>
+                            </div>
+                            <div class="switch">
+                                <input type="hidden" value="0" name="appointment">
+                                {!! Form::checkbox('appointment', 1, $site->appointment, ['class' => 'switch', 'id' => 'switch-forgot-pass','style' => 'width = 10px;']) !!}
+                                <label for="switch-forgot-pass"></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

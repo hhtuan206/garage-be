@@ -35,7 +35,7 @@
             <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i
                     class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
             </span>
-                <img src="{{asset('upload/'.$site[0]->content)}}" alt="" width="75">
+                <img src="{{asset('upload/'.$site->logo)}}" alt="" width="75">
             </div>
             <!-- end invoice-company -->
             <!-- begin invoice-header -->

@@ -221,7 +221,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('site', 'Backend\SiteController');
     Route::resource('categories', 'Backend\CategoryController');
     Route::resource('cars', 'Backend\CarController');
-
+    Route::get('/statisRepair','Backend\StatisController@statisRepair')->name('statis.repair');
+    Route::get('/statisComponent','Backend\StatisController@statisComponent')->name('statis.component');
     Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
         Route::get('/', 'ImportController@index')->name('imports.index');
         Route::get('service', 'ImportController@exportService')->name('exports.service');
@@ -233,7 +234,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/', 'Client\ClientController@index')->name('customer.home');
-Route::get('/appointment', 'Client\AppointmentController@index')->name('customer.appointment');
+Route::get('/appointment', 'Client\AppointmentController@index')->name('customer.appointment')->middleware('auth');
 Route::get('/about', 'Client\ClientController@about')->name('customer.about');
 Route::get('/components', 'Client\ClientController@component')->name('customer.component');
 Route::get('/services', 'Client\ClientController@service')->name('customer.service');

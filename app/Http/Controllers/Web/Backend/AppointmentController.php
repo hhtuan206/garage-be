@@ -19,7 +19,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy('id','desc')->simplePaginate(6);
+        $appointments = Appointment::orderBy('id', 'desc')->simplePaginate(6);
         return view('appointment.index', compact('appointments'));
     }
 
@@ -43,16 +43,25 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        $full_name = $this->parseName($request->full_name);
-        $user = User::updateOrCreate(['phone' => $request->phone], [
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'first_name' => $full_name->first_name,
-            'last_name' => $full_name->last_name,
-            'address' => $request->address ?? "",
-            'role_id' => Role::where('name', 'User')->first()->id,
-            'status' => 'ACTIVE',
+        $request->validate([
+            'phone' => 'required|numeric'
+        ],[
+            'phone.numeric' => 'Số điện thoại không được chứa ký hiệu đặc biệt hoặc chữ cái',
+            'phone.required' => 'Số điện thoại không được để trống',
         ]);
+        $full_name = $this->parseName($request->full_name);
+        $user = User::updateOrCreate(
+            [
+                'phone' => $request->phone,
+            ],
+            [
+                'phone' => $request->phone,
+                'first_name' => $full_name->first_name,
+                'last_name' => $full_name->last_name,
+                'address' => $request->address ?? "",
+                'role_id' => Role::where('name', 'User')->first()->id,
+                'status' => 'ACTIVE',
+            ]);
         $appointment = Appointment::updateOrCreate([
             'user_id' => $user->id,
             'date' => date('Y-m-d', strtotime($request->time)),
@@ -89,7 +98,7 @@ class AppointmentController extends Controller
         return view('appointment.add-edit', [
             'edit' => true,
             'appointment' => $appointment,
-            'customer'=>User::find($appointment->user_id)
+            'customer' => User::find($appointment->user_id)
         ]);
     }
 
