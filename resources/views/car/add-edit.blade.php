@@ -93,7 +93,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        {{ __($edit ? 'Update Appointment' : 'Create Appointment') }}
+        {{ __($edit ? 'Cập nhật xe' : 'Tạo xe') }}
     </button>
 
 @stop
@@ -102,11 +102,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-
         $(document).ready(function () {
+            $('#service').select2();
+            $('#component').select2();
+            $('#attribute').select2();
+
             $('#attribute').on('change', function () {
-                console.log($(this).val()
-                )
                 $.ajax({
                     url: '{{route("render-attribute")}}',
                     type: "post",
@@ -119,9 +120,8 @@
                     }
                 })
             })
-            $('#service').select2();
-            $('#component').select2();
-            $('#attribute').select2();
+
         })
+
     </script>
 @stop

@@ -20,9 +20,19 @@ class RepairController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $repairs = Repair::orderBy('id', 'desc')->simplePaginate(12);
+        $query = Repair::query();
+        if ($request->has('search') && $request->search != '') {
+            $query->whereHas('user', function ($query) use ($request) {
+                $query->where('users.first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('users.last_name', 'like', '%' . $request->search . '%');
+
+            })->orWhereHas('car', function ($query) use ($request) {
+                $query->where('cars.number_plate', 'like', '%' . $request->search . '%');
+            });
+        }
+        $repairs = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('repair.index', compact('repairs'));
     }
 
@@ -80,6 +90,9 @@ class RepairController extends Controller
             }
             if ($request->has('components')) {
                 foreach ($request->components as $key => $component) {
+                    $ct = Component::find($component);
+                    $ct->stock = (int)$ct->stock - (int) $request->quantities[$key];
+                    $ct->save();
                     $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
                 }
                 $total_price += (int)$this->calculateTotal(null, $request->components, $request->quantities);

@@ -15,24 +15,40 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row mb-3 pb-3 border-bottom-light">
-                <div class="col-lg-12">
-                    <div class="float-left">
-                        <form action="" class="form-inline">
-                            <div class="form-group form-group-lg">
-                                <input class="form-control input-sm" id="inputsm" type="text">
-                                <a><i style='font-size:24px' class='fas'>&#xf002;</i></a>
-                            </div>
-                        </form>
+            <form action="" method="GET" id="users-form" class="pb-2 mb-3 border-bottom-light">
+                <div class="row my-3 flex-md-row flex-column-reverse">
+                    <div class="col-md-3 mt-md-0 mt-2">
+                        <div class="input-group custom-search-form">
+                            <input type="text"
+                                   class="form-control input-solid"
+                                   name="search"
+                                   value="{{ Request::get('search') }}"
+                                   placeholder="@lang('Tìm theo tên khách hàng')">
+
+                            <span class="input-group-append">
+                                @if (Request::has('search') && Request::get('search') != '')
+                                    <a href="{{ route('appointments.index') }}"
+                                       class="btn btn-light d-flex align-items-center text-muted"
+                                       role="button">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                @endif
+                            </span>
+                        </div>
                     </div>
-                    <div class="float-right ">
+                    <div class="col-md-3 mt-md-0 mt-2">
+                    </div>
+                    @permission('admin')
+                    <div class="col-md-6 text-right">
                         <a href="{{ route('appointments.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
                             @lang('vn.Add Appointment')
                         </a>
                     </div>
+                    @endpermission
                 </div>
-            </div>
+            </form>
+
 
             <div class="table-responsive" id="users-table-wrapper">
                 <table class="table table-striped table-borderless">
@@ -62,6 +78,7 @@
                                            title="Cập nhật đặt lịch" data-toggle="tooltip" data-placement="top">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    @permission('admin')
                                     <a href="{{ route('appointments.destroy', $appointment) }}" class="btn btn-icon"
                                        title="@lang('vn.Delete Appointment')"
                                        data-toggle="tooltip"
@@ -72,6 +89,7 @@
                                        data-confirm-delete="@lang('vn.Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    @endpermission
                                 </td>
                             </tr>
                         @endforeach

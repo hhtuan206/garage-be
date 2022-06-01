@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="status">@lang('vn.Status')</label>
-                        {!! Form::select('status',[0=>'Deactivate',1=>"Active"],null,['class'=>'form-control input-solid']) !!}
+                        {!! Form::select('status',['Deactive'=>'Không hoạt động','Active'=>"Hoạt động"],$service->status ?? '',['class'=>'form-control input-solid']) !!}
                     </div>
                 </div>
             </div>

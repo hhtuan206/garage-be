@@ -9,6 +9,9 @@ class Service extends Model
 {
     use HasFactory;
 
+    const ACTIVE = 'Active';
+    const DEACTIVATE = 'Deactive';
+
     protected $fillable = [
         'name',
         'price',
@@ -19,11 +22,20 @@ class Service extends Model
 
     public function repairs()
     {
-        return $this->belongsToMany(Repair::class,'repair_service','service_id');
+        return $this->belongsToMany(Repair::class, 'repair_service', 'service_id');
     }
 
     public function getPricesAttribute()
     {
-        return number_format($this->price,0);
+        return number_format($this->price, 0);
+    }
+
+    public function getStatussAttribute()
+    {
+        if ($this->status == self::ACTIVE) {
+            return '<label for="" class="badge badge-info">Hoạt động</label>';
+        }
+        return '<label for="" class="badge badge-primary">Không hoạt động</label>';
+
     }
 }

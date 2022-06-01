@@ -39,13 +39,14 @@
                     <div class="col-md-3 mt-md-0 mt-2">
                         {!! Form::select('stock',[0 => 'Tất cả',1 => 'Tồn kho',2=>'Hết hàng'],Request::get('stock'),['class' => 'form-control input-solid','id' => 'stock']) !!}
                     </div>
-
+                    @permission('admin')
                     <div class="col-md-6 text-right">
                         <a href="{{ route('components.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
                             @lang('vn.Add Component')
                         </a>
                     </div>
+                    @endpermission
                 </div>
             </form>
 
@@ -54,20 +55,23 @@
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>
-                        <th class="min-width-100">@lang('vn.Image')</th>
-                        <th class="min-width-100">@lang('vn.Name')</th>
-                        <th class="min-width-150">@lang('vn.Price')</th>
-                        <th class="min-width-150">@lang('vn.Unit')</th>
-                        <th class="min-width-150">@lang('vn.Detail')</th>
-                        <th class="min-width-150">@lang('vn.Stock')</th>
-                        <th class="min-width-150">Thể loại</th>
+                        <th class="">#</th>
+                        <th class="">@lang('vn.Image')</th>
+                        <th class="">@lang('vn.Name')</th>
+                        <th class="">@lang('vn.Price')</th>
+                        <th class="">@lang('vn.Unit')</th>
+                        <th class="">@lang('vn.Detail')</th>
+                        <th class="">@lang('vn.Stock')</th>
+                        <th class="">Thể loại</th>
+                        <th class="text-center">Số lượt sử dụng</th>
                         <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
                     <tbody>
                     @if (count($components))
-                        @foreach ($components as $component)
+                        @foreach ($components as $key => $component)
                             <tr>
+                                <td>{{$key}}</td>
                                 <td><img src="{{asset('component/'.$component->image)}}" alt="" width="75px"
                                          height="75px"></td>
                                 <td>{{ $component->name }}</td>
@@ -76,12 +80,14 @@
                                 <td>{!!  \Illuminate\Support\Str::limit($component->description,$limit = 30, $end = '...') !!} </td>
                                 <td>{{ $component->stock ?? 'Hết hàng' }}</td>
                                 <td>{{$component->category_name}}</td>
+                                <td class="text-center">{{count($component->repairs)}}</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-icon"
                                        title="@lang('Cập nhật tồn kho')" data-toggle="modal"
                                        data-target="#exampleModal" data-whatever="{{$component->id}}">
                                         <i class="fas fa-layer-group"></i>
                                     </a>
+                                    @permission('admin')
                                     <a href="{{ route('components.edit', $component) }}" class="btn btn-icon"
                                        title="@lang('vn.Edit Component')" data-toggle="tooltip"
                                        data-placement="top">
@@ -97,6 +103,7 @@
                                        data-confirm-delete="@lang('vn.Yes, delete it!')">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    @endpermission
                                 </td>
                             </tr>
                         @endforeach

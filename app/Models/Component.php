@@ -20,6 +20,7 @@ class Component extends Model
         'stock',
         'unit',
         'description',
+        'category_id',
     ];
 
     public function category()

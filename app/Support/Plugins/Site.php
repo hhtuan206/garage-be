@@ -13,6 +13,6 @@ class Site extends \Vanguard\Plugins\Plugin
         return Item::create(__('vn.Site'))
             ->route('site.index')
             ->icon('fa fa-sitemap')
-            ->active("admin/site*");
+            ->active("admin/site*")->permissions('admin');
     }
 }

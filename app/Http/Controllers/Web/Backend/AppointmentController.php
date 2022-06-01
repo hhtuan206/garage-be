@@ -17,9 +17,16 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $appointments = Appointment::orderBy('id', 'desc')->simplePaginate(12);
+        $query = Appointment::query();
+        if ($request->has('search') && $request->search != '') {
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('users.first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('users.last_name', 'like', '%' . $request->search . '%');
+            });
+        }
+        $appointments = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('appointment.index', compact('appointments'));
     }
 
@@ -61,7 +68,7 @@ class AppointmentController extends Controller
                     'last_name' => $full_name->last_name,
                     'address' => $request->address ?? "",
                     'role_id' => Role::where('name', 'User')->first()->id,
-                    'status' => 'ACTIVE',
+                    'status' => 'Active',
                 ]);
             Appointment::updateOrCreate([
                 'user_id' => $user->id,

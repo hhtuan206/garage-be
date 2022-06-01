@@ -17,7 +17,17 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        $cars = Car::orderBy('created_at', 'desc')->simplePaginate(6);
+        $query = Car::query();
+        if ($request->has('search') && $request->search != '') {
+            $query->whereHas('user', function ($query) use ($request) {
+                $query->where('users.first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('users.last_name', 'like', '%' . $request->search . '%');
+
+            });
+            $query->orWhere('cars.number_plate', 'like', '%' . $request->search . '%');
+
+        }
+        $cars = $query->orderBy('created_at', 'desc')->simplePaginate(12);
         return view('car.index', compact('cars'));
     }
 
@@ -84,9 +94,16 @@ class CarController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Car $car)
     {
-        //
+        $attributes = Attribute::all()->pluck('name', 'id');
+        $users = User::orderBy('id', 'desc')->get()->pluck('info', 'id');
+        return view('car.add-edit', [
+            'edit' => true,
+            'users' => $users,
+            'attributes' => $attributes,
+            'car' => $car,
+        ]);
     }
 
     /**
@@ -107,8 +124,9 @@ class CarController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Car $car)
     {
-        //
+        Car::destroy($car->id);
+        return redirect()->back()->withSuccess('Xoá xe thành công');
     }
 }

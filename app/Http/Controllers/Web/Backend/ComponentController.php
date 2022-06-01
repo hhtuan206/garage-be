@@ -32,7 +32,7 @@ class ComponentController extends Controller
             }
         }
         if ($request->has('search') && $request->search != '') {
-            $query->where('name', $request->search);
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
         $components = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('component.index', compact('components'));
@@ -45,7 +45,7 @@ class ComponentController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('type','component')->get()->pluck('name','id');
+        $categories = Category::where('type', 'component')->get()->pluck('name', 'id');
         return view('component.add-edit', ['edit' => false, 'categories' => $categories]);
     }
 
@@ -57,6 +57,7 @@ class ComponentController extends Controller
      */
     public function store(Request $request)
     {
+
         Component::create($request->all());
         return redirect()->route('components.index')
             ->withSuccess(__('Component create successfully.'));
@@ -81,8 +82,8 @@ class ComponentController extends Controller
      */
     public function edit(Component $component)
     {
-        $categories = Category::where('type','component')->get()->pluck('name','id');
-        return view('component.add-edit', ['edit' => true, 'component' => $component,'categories' => $categories]);
+        $categories = Category::where('type', 'component')->get()->pluck('name', 'id');
+        return view('component.add-edit', ['edit' => true, 'component' => $component, 'categories' => $categories]);
     }
 
     /**
@@ -120,7 +121,7 @@ class ComponentController extends Controller
 
     public function updateStock(Request $request, $id)
     {
-        $compnent =  Component::find($id);
+        $compnent = Component::find($id);
         $compnent->stock = (int)$request->stock + (int)$compnent->stock;
         $compnent->save();
         return redirect()->route('components.index')

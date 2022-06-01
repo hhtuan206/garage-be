@@ -15,24 +15,38 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row mb-3 pb-3 border-bottom-light">
-                <div class="col-lg-12">
-                    <div class="float-left">
-                        <form action="" class="form-inline">
-                            <div class="form-group form-group-lg">
-                                <input class="form-control input-sm" id="inputsm" type="text">
-                                <a><i style='font-size:24px' class='fas'>&#xf002;</i></a>
-                            </div>
-                        </form>
+            <form action="" method="GET" id="users-form" class="pb-2 mb-3 border-bottom-light">
+                <div class="row my-3 flex-md-row flex-column-reverse">
+                    <div class="col-md-3 mt-md-0 mt-2">
+                        <div class="input-group custom-search-form">
+                            <input type="text"
+                                   class="form-control input-solid"
+                                   name="search"
+                                   value="{{ Request::get('search') }}"
+                                   placeholder="@lang('Tìm theo tên khách hàng hoặc biển số xe')">
+
+                            <span class="input-group-append">
+                                @if (Request::has('search') && Request::get('search') != '')
+                                    <a href="{{ route('cars.index') }}"
+                                       class="btn btn-light d-flex align-items-center text-muted"
+                                       role="button">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                @endif
+                            </span>
+                        </div>
                     </div>
-                    <div class="float-right ">
+                    <div class="col-md-3 mt-md-0 mt-2">
+                    </div>
+
+                    <div class="col-md-6 text-right">
                         <a href="{{ route('cars.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
                             @lang('Thêm xe')
                         </a>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <div class="table-responsive" id="users-table-wrapper">
                 <table class="table table-striped table-borderless">

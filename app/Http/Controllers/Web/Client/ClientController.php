@@ -22,8 +22,8 @@ class ClientController extends Controller
         $components = Component::all();
         $services = Service::all();
         $repairs = Repair::all();
-        $news = News::orderBy('created_at','desc')->get();
-        return view('customer.index', compact('users', 'components', 'services','repairs','news'));
+        $news = News::orderBy('created_at', 'desc')->get();
+        return view('customer.index', compact('users', 'components', 'services', 'repairs', 'news'));
     }
 
 
@@ -39,9 +39,16 @@ class ClientController extends Controller
         return view('customer.service', compact('services'));
     }
 
-    public function component()
+    public function component(Request $request)
     {
-        $components = Component::orderBy('id', 'desc')->simplePaginate(12);
+        $query = Component::query();
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category_id', $request->category);
+        }
+        $components = $query->orderBy('id', 'desc')->simplePaginate(12);
         $categories = Category::where('type', 'component')->get();
         return view('customer.component', compact('components', 'categories'));
     }
@@ -56,6 +63,11 @@ class ClientController extends Controller
             'unit' => $component->unit,
             'description' => $component->description,
         ]);
+    }
+
+    public function news(News $new)
+    {
+        return view('customer.new', compact('new'));
     }
 
 }

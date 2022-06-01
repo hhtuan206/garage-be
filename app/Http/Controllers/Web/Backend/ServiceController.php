@@ -16,9 +16,17 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::orderBy('id','desc')->simplePaginate(6);
+        $query = Service::query();
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status' ,$request->status);
+        }
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name' ,'like','%'.$request->search.'%');
+        }
+
+        $services = $query->orderBy('updated_at', 'desc')->simplePaginate(12);
         return view('service.index', compact('services'));
     }
 

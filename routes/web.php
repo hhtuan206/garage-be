@@ -221,8 +221,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('site', 'Backend\SiteController');
     Route::resource('categories', 'Backend\CategoryController');
     Route::resource('cars', 'Backend\CarController');
-    Route::get('/statisRepair','Backend\StatisController@statisRepair')->name('statis.repair');
-    Route::get('/statisComponent','Backend\StatisController@statisComponent')->name('statis.component');
+    Route::get('/statisRepair', 'Backend\StatisController@statisRepair')->name('statis.repair');
+    Route::get('/statisComponent', 'Backend\StatisController@statisComponent')->name('statis.component');
     Route::group(['prefix' => 'import', 'middleware' => 'auth'], function () {
         Route::get('/', 'ImportController@index')->name('imports.index');
         Route::get('service', 'ImportController@exportService')->name('exports.service');
@@ -239,6 +239,7 @@ Route::get('/about', 'Client\ClientController@about')->name('customer.about');
 Route::get('/components', 'Client\ClientController@component')->name('customer.component');
 Route::get('/services', 'Client\ClientController@service')->name('customer.service');
 Route::get('/contact', 'Client\ClientController@contact')->name('customer.contact');
+Route::get('/news/{new}', 'Client\ClientController@news')->name('customer.new');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', 'Client\UsersController@index')->name('customer.profile');

@@ -10,7 +10,9 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         @foreach($categories as $category)
-                            <li class="list-group-item">{{$category->name}}</li>
+                            <li class="list-group-item"><a
+                                    href="{{route('customer.component',['category'=> $category->id])}}">{{$category->name}}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -18,7 +20,41 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="card">
-                        <h5 class="card-header">Danh sách linh kiện</h5>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6"><h5 class="card-text ">Danh sách linh kiện</h5></div>
+                                <div class="col-md-6 ">
+                                    <form action="" method="GET" id="users-form"
+                                          class=" align-text-top  border-bottom-light">
+                                        <div class="row flex-md-row flex-column-reverse">
+                                            <div class="col-md-12">
+                                                <div class="input-group custom-search-form">
+                                                    <input type="text"
+                                                           class="form-control input-solid"
+                                                           name="search"
+                                                           value="{{ Request::get('search') }}"
+                                                           placeholder="@lang('Tìm theo tên sản phẩm')">
+
+                                                    <span class="input-group-append">
+                                                        @if (Request::has('search') && Request::get('search') != '')
+                                                            <a href="{{ route('customer.component') }}"
+                                                               class="btn btn-light d-flex align-items-center text-muted"
+                                                               role="button">
+                                                                <i class="fas fa-times"></i>
+                                                            </a>
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
                         <div class="card-body">
                             @foreach($components->chunk(4) as $componentC)
                                 <div class="row">
@@ -27,7 +63,7 @@
                                             <div class="card">
                                                 <img src="{{asset('component/'.$component->image)}}"
                                                      class="card-img-top" alt="{{$component->name}}" width="75"
-                                                     height="125" loading=lazy>
+                                                     height="75" loading=lazy>
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{$component->name}}</h5>
                                                     <p class="card-text">Giá: {{$component->prices}}

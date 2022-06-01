@@ -14,9 +14,13 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::orderBy('id', 'desc')->simplePaginate(6);
+        $query = News::query();
+        if ($request->has('search') && $request->search != '') {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+        $news = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('news.index', compact('news'));
     }
 

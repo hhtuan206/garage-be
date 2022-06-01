@@ -4,6 +4,7 @@ namespace Vanguard\Providers;
 
 use Vanguard\Plugins\VanguardServiceProvider as BaseVanguardServiceProvider;
 use Vanguard\Support\Plugins\Appointment;
+use Vanguard\Support\Plugins\Attribute;
 use Vanguard\Support\Plugins\Car;
 use Vanguard\Support\Plugins\Category;
 use Vanguard\Support\Plugins\Component;
@@ -43,10 +44,11 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             Import::class,
             News::class,
             Category::class,
+            Attribute::class,
             Statis::class,
             Site::class,
             \Vanguard\UserActivity\UserActivity::class,
-//            \Vanguard\Support\Plugins\RolesAndPermissions::class,
+            \Vanguard\Support\Plugins\RolesAndPermissions::class,
 //            \Vanguard\Support\Plugins\Settings::class,
 //            \Vanguard\Announcements\Announcements::class,
 

@@ -99,7 +99,7 @@
             <div class="owl-carousel testimonial-carousel position-relative">
                 @foreach($news as $new)
                     <div class="testimonial-item text-center">
-                        <a href="">
+                        <a href="{{route('customer.new',$new)}}">
                         <img class="bg-light rounded-square p-2 mx-auto mb-3"
                              src="{{asset('new/'.$new->image)}}" style="width: 250px; height: 150px;">
                         <h5 class="mb-0">{{$new->title}}</h5>

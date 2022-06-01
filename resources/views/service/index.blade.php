@@ -23,11 +23,11 @@
                                    class="form-control input-solid"
                                    name="search"
                                    value="{{ Request::get('search') }}"
-                                   placeholder="@lang('Search for users...')">
+                                   placeholder="@lang('Tìm kiếm dịch vụ')">
 
                             <span class="input-group-append">
                                 @if (Request::has('search') && Request::get('search') != '')
-                                    <a href="{{ route('users.index') }}"
+                                    <a href="{{ route('services.index') }}"
                                        class="btn btn-light d-flex align-items-center text-muted"
                                        role="button">
                                         <i class="fas fa-times"></i>
@@ -44,7 +44,7 @@
                         {!!
                             Form::select(
                                 'status',
-                                [''=>'Tất cả','active'=>"Đang hoạt động",'deactivate'=>'Dừng hoạt động'],
+                                [''=>'Tất cả','Active'=>"Đang hoạt động",'Deactive'=>'Dừng hoạt động'],
                                 Request::get('status'),
                                 ['id' => 'status', 'class' => 'form-control input-solid']
                             )
@@ -68,6 +68,7 @@
                         <th class="min-width-150">@lang('vn.Price')</th>
                         <th class="min-width-150">@lang('vn.Detail')</th>
                         <th class="min-width-150">@lang('vn.Status')</th>
+                        <th class="text-center">@lang('Số lượt sử dụng')</th>
                         <th class="text-center">@lang('vn.Action')</th>
                     </tr>
                     </thead>
@@ -79,10 +80,9 @@
                                 <td>{{ $service->name }}</td>
                                 <td>{{ $service->prices }}đ</td>
                                 <td>{!!  \Illuminate\Support\Str::limit($service->detail,$limit = 30, $end = '...') !!} </td>
-                                <td><label for=""
-                                           class="badge badge-info">{{ $service->status ? 'Hoạt động': 'Dừng hoạt động' }}</label>
+                                <td>{!! $service->statuss !!}
                                 </td>
-
+                                <td class="text-center">{{count($service->repairs)}}</td>
                                 <td class="text-center">
                                     @permission('edit.service')
                                     <a href="{{ route('services.edit', $service) }}" class="btn btn-icon"
@@ -118,4 +118,11 @@
             {!! $services->links() !!}
         </div>
     </div>
+@stop
+@section('scripts')
+    <script>
+        $("#status").change(function () {
+            $("#users-form").submit();
+        });
+    </script>
 @stop
