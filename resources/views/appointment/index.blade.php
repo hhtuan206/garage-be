@@ -54,7 +54,7 @@
                                 <td>{{$appointment->date_time}}</td>
                                 <td>{!! $appointment->statuss !!}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('repairs.create', ['user_id' =>$appointment->user_id]) }}"
+                                    <a href="{{ route('repairs.create', ['user' => $appointment->user_id]) }}"
                                        class="btn btn-icon"
                                        title="Sửa chữa" data-toggle="tooltip" data-placement="top">
                                         <i class="fab fa-accusoft"></i>

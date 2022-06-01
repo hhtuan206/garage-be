@@ -36,7 +36,7 @@
                 <div class="col-sm-9">
                     <div class="exist">
                         {{--                        @include('repair.partials.customer')--}}
-                        {!! Form::select('user_id',$users,null,['class'=>'form-control input-solid','id' => 'user']) !!}
+                        {!! Form::select('user_id',$users,Request::get('user') ?? '',['class'=>'form-control input-solid','id' => 'user']) !!}
                     </div>
 
                 </div>

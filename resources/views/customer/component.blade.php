@@ -32,6 +32,15 @@
                                                     <h5 class="card-title">{{$component->name}}</h5>
                                                     <p class="card-text">Giá: {{$component->prices}}
                                                         đ/{{$component->unit}}</p>
+                                                    <p class="card-text text-light">
+                                                        @if($component->stock)
+                                                            <label class=" bg bg-success"> Còn hàng</label>
+                                                        @else
+                                                            <label class=" bg bg-warning text-dark"> Hết hàng</label>
+
+                                                        @endif
+                                                    </p>
+
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal"
                                                             data-bs-whatever="{{$component->id}}">Chi tiết

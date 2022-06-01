@@ -19,7 +19,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy('id', 'desc')->simplePaginate(6);
+        $appointments = Appointment::orderBy('id', 'desc')->simplePaginate(12);
         return view('appointment.index', compact('appointments'));
     }
 
@@ -45,35 +45,42 @@ class AppointmentController extends Controller
     {
         $request->validate([
             'phone' => 'required|numeric'
-        ],[
+        ], [
             'phone.numeric' => 'Số điện thoại không được chứa ký hiệu đặc biệt hoặc chữ cái',
             'phone.required' => 'Số điện thoại không được để trống',
         ]);
-        $full_name = $this->parseName($request->full_name);
-        $user = User::updateOrCreate(
-            [
-                'phone' => $request->phone,
-            ],
-            [
-                'phone' => $request->phone,
-                'first_name' => $full_name->first_name,
-                'last_name' => $full_name->last_name,
-                'address' => $request->address ?? "",
-                'role_id' => Role::where('name', 'User')->first()->id,
-                'status' => 'ACTIVE',
+        try {
+            $full_name = $this->parseName($request->full_name);
+            $user = User::updateOrCreate(
+                [
+                    'phone' => $request->phone,
+                ],
+                [
+                    'phone' => $request->phone,
+                    'first_name' => $full_name->first_name,
+                    'last_name' => $full_name->last_name,
+                    'address' => $request->address ?? "",
+                    'role_id' => Role::where('name', 'User')->first()->id,
+                    'status' => 'ACTIVE',
+                ]);
+            Appointment::updateOrCreate([
+                'user_id' => $user->id,
+                'date' => date('Y-m-d', strtotime($request->time)),
+                'status' => $request->status
+            ], [
+                'user_id' => $user->id,
+                'time' => date('H:i', strtotime($request->time)),
+                'date' => date('Y-m-d', strtotime($request->time)),
+                'status' => $request->status,
             ]);
-        $appointment = Appointment::updateOrCreate([
-            'user_id' => $user->id,
-            'date' => date('Y-m-d', strtotime($request->time)),
-            'status' => $request->status
-        ], [
-            'user_id' => $user->id,
-            'time' => date('H:i', strtotime($request->time)),
-            'date' => date('Y-m-d', strtotime($request->time)),
-            'status' => $request->status,
-        ]);
-        return redirect()->route('appointments.index')
-            ->withSuccess(__('Appointment created successfully.'));
+            return redirect()->route('appointments.index')
+                ->withSuccess(__('Appointment created successfully.'));
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return redirect()->route('appointments.index')
+                ->withErrors(__('Có lỗi xảy ra vui lòng thử lại sau.'));
+        }
+
     }
 
     /**
@@ -111,24 +118,20 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        $full_name = $this->parseName($request->full_name);
-        $user = User::where('phone', $request->phone)->update([
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'first_name' => $full_name->first_name,
-            'last_name' => $full_name->last_name,
-            'address' => $request->address ?? "",
-            'role_id' => Role::where('name', 'User')->first()->id,
-            'status' => 'ACTIVE',
-        ]);
-        Appointment::find($appointment->id)->update([
-            'user_id' => $user->id,
-            'time' => date('H:i', strtotime($request->time)),
-            'date' => date('Y-m-d', strtotime($request->time)),
-            'status' => $request->status,
-        ]);
-        return redirect()->route('appointments.index')
-            ->withSuccess(__('Appointment updated successfully.'));
+        try {
+            Appointment::find($appointment->id)->update([
+                'time' => date('H:i', strtotime($request->time)),
+                'date' => date('Y-m-d', strtotime($request->time)),
+                'status' => $request->status,
+            ]);
+            return redirect()->route('appointments.index')
+                ->withSuccess(__('Appointment updated successfully.'));
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return redirect()->route('appointments.index')
+                ->withErrors(__('Có lỗi xảy ra vui lòng thử lại sau.'));
+        }
+
     }
 
     /**

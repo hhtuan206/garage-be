@@ -6,14 +6,24 @@ use Illuminate\Http\Request;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Models\Category;
 use Vanguard\Models\Component;
+use Vanguard\Models\News;
+use Vanguard\Models\Repair;
 use Vanguard\Models\Service;
+use Vanguard\Role;
+use Vanguard\User;
 
 class ClientController extends Controller
 {
+    const STAFF = 'staff';
 
     public function index()
     {
-        return view('customer.index');
+        $users = Role::where('name', self::STAFF)->first()->users;
+        $components = Component::all();
+        $services = Service::all();
+        $repairs = Repair::all();
+        $news = News::orderBy('created_at','desc')->get();
+        return view('customer.index', compact('users', 'components', 'services','repairs','news'));
     }
 
 
@@ -42,8 +52,8 @@ class ClientController extends Controller
         return response()->json([
             'name' => $component->name,
             'image' => $component->image,
-            'price' =>$component->prices,
-            'unit' =>$component->unit,
+            'price' => $component->prices,
+            'unit' => $component->unit,
             'description' => $component->description,
         ]);
     }

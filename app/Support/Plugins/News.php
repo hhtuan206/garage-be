@@ -14,6 +14,6 @@ class News extends Plugin
         return Item::create(__('vn.News'))
             ->route('news.index')
             ->icon('fas fa-newspaper')
-            ->active("news*");
+            ->active("admin/news*");
     }
 }

@@ -12,7 +12,7 @@ class Repair extends \Vanguard\Plugins\Plugin
     {
         return Item::create(__('vn.Repair'))
             ->route('repairs.index')
-            ->icon('fas fa-car')
-            ->active("repairs*");
+            ->icon('fa fa-wrench')
+            ->active("admin/repairs*");
     }
 }

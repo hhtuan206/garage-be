@@ -13,6 +13,6 @@ class Appointment extends \Vanguard\Plugins\Plugin
         return Item::create(__('vn.Appointment'))
             ->route('appointments.index')
             ->icon('fas fa-book-open')
-            ->active("appointments*");
+            ->active("admin/appointments*");
     }
 }

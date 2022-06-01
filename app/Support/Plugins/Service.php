@@ -14,6 +14,6 @@ class Service extends Plugin
         return Item::create(__('vn.Services'))
             ->route('services.index')
             ->icon('fab fa-servicestack')
-            ->active("services*");
+            ->active("admin/services*");
     }
 }

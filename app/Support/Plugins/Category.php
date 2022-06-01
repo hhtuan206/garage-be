@@ -13,6 +13,6 @@ class Category extends \Vanguard\Plugins\Plugin
         return Item::create(__('Quản lý thể loại'))
             ->route('categories.index')
             ->icon('fa fa-american-sign-language-interpreting')
-            ->active("categories*");
+            ->active("admin/categories*");
     }
 }

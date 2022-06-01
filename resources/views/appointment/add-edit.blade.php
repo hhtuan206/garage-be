@@ -60,6 +60,8 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            var today = new Date().toISOString().slice(0, 16);
+            document.getElementsByName("time")[0].min = today;
             $('input[name=phone]').change(function () {
                 console.log($(this).val())
                 if ($('#phone').val() !== null) {
@@ -83,5 +85,6 @@
                 }
             })
         })
+
     </script>
 @stop

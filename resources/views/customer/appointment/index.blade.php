@@ -1,5 +1,9 @@
 @extends('layouts.client')
 @section('content')
+
+    <div class="row text-center">
+        @include('partials.messages')
+    </div>
     <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
@@ -9,7 +13,8 @@
                             class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                             data-wow-delay="0.6s">
                             <h1 class="text-white mb-4">Đặt lịch hẹn sửa chữa</h1>
-                            <form>
+                            <form method="post" action="{{route('customer.store')}}">
+                                @csrf
                                 <div class="row g-3">
                                     <div class="col-12 col-sm-6">
                                         <input type="text" class="form-control border-0"
@@ -48,4 +53,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        var today = new Date().toISOString().slice(0, 16);
+
+        document.getElementsByName("time")[0].min = today;
+    </script>
 @endsection

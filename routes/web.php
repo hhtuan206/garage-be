@@ -202,7 +202,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
          * Activity Log
          */
 
-        Route::get('activity', 'ActivityController@index')->name('activity.index')
+        Route::get('admin/activity', 'ActivityController@index')->name('activity.index')
             ->middleware('permission:users.activity');
 
         Route::get('activity/user/{user}/log', 'Users\ActivityController@index')->name('activity.user')
@@ -245,6 +245,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/profile/{user}', 'Client\UsersController@update')->name('customer.updateProfile');
     Route::get('/repair', 'Client\UsersController@repair')->name('customer.viewRepair');
     Route::get('/appointments', 'Client\AppointmentController@history')->name('customer.viewAppointment');
+    Route::post('/appointments', 'Client\AppointmentController@store')->name('customer.store');
 });
 
 Route::get('/detailComponent/{id}', 'Client\ClientController@getDetailComponent')->name('detail.com');

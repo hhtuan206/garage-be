@@ -86,7 +86,6 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="/" class="nav-item nav-link active">Trang chủ</a>
-            <a href="{{route('customer.about')}}" class="nav-item nav-link">Giới thiệu</a>
             <a href="{{route('customer.service')}}" class="nav-item nav-link">Dịch vụ</a>
             <a href="{{route('customer.component')}}" class="nav-item nav-link">Linh kiện</a>
 

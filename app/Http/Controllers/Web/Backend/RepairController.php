@@ -35,7 +35,7 @@ class RepairController extends Controller
     {
         $attributes = Attribute::all()->pluck('name', 'id');
         $services = Service::all()->pluck('name', 'id');
-        $components = Component::all()->pluck('name', 'id');
+        $components = Component::where('stock', '>', 0)->pluck('name', 'id');
         $users = User::all()->pluck('info', 'id');
         if (\request()->user_id != null) {
             $user = User::findOrFail(\request()->user_id);
@@ -59,27 +59,39 @@ class RepairController extends Controller
      */
     public function store(Request $request)
     {
-        $total_price = null;
-        $repair = Repair::create([
-            'car_id' => $request->car_id,
-            'user_id' => $request->user_id,
-            'total_price' => 0,
+        $request->validate([
+            'car_id' => 'required',
+            'services' => 'required'
+        ], [
+            'car_id.required' => 'Phải chọn 1 xe',
+            'services.required' => 'Phải chọn 1 dịch vụ',
         ]);
+        try {
+            $total_price = null;
+            $repair = Repair::create([
+                'car_id' => $request->car_id,
+                'user_id' => $request->user_id,
+                'total_price' => 0,
+            ]);
 
-        if ($request->has('services')) {
-            $total_price += (int)$this->calculateTotal($request->services, null, null);
-            $repair->services()->sync($request->services);
-        }
-        if ($request->has('components')) {
-            foreach ($request->components as $key => $component) {
-                $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
+            if ($request->has('services')) {
+                $total_price += (int)$this->calculateTotal($request->services, null, null);
+                $repair->services()->sync($request->services);
             }
-            $total_price += (int)$this->calculateTotal(null, $request->components, $request->quantities);
+            if ($request->has('components')) {
+                foreach ($request->components as $key => $component) {
+                    $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
+                }
+                $total_price += (int)$this->calculateTotal(null, $request->components, $request->quantities);
+            }
+            $repair->total_price = $total_price;
+            $repair->save();
+            return redirect()->route('repairs.index')
+                ->withSuccess(__('Repair created successfully.'));
+        } catch (\Exception $e) {
+            return redirect()->route('repairs.index')
+                ->withErrors(__('Có lỗi sảy ra vui lòng thử lại sau.'));
         }
-        $repair->total_price = $total_price;
-        $repair->save();
-        return redirect()->route('repairs.index')
-            ->withSuccess(__('Repair created successfully.'));
     }
 
     /**
@@ -118,26 +130,30 @@ class RepairController extends Controller
 
     public function calculateTotal($services, $components, $quatities)
     {
-        $total = null;
-        if ($components != null && $quatities != null) {
-            if (count($components) > 1) {
-                foreach (Component::find($components) as $key => $item) {
-                    $total += $item->price * $quatities[$key];
+        try {
+            $total = null;
+            if ($components != null && $quatities != null) {
+                if (count($components) > 1) {
+                    foreach (Component::find($components) as $key => $item) {
+                        $total += $item->price * $quatities[$key];
+                    }
+                } else {
+                    $total += (int)Component::find($components)->first()->price * $quatities[0];
                 }
-            } else {
-                $total += (int)Component::find($components)->first()->price * $quatities[0];
             }
-        }
-        if ($services != null) {
-            if (count($services) > 1) {
-                foreach (Service::find($services) as $item) {
-                    $total += (int)$item->price;
+            if ($services != null) {
+                if (count($services) > 1) {
+                    foreach (Service::find($services) as $item) {
+                        $total += (int)$item->price;
+                    }
+                } else {
+                    $total += (int)Service::find($services)->first()->price;
                 }
-            } else {
-                $total += (int)Service::find($services)->first()->price;
             }
+            return $total;
+        } catch (\Exception $e) {
+            \Log::error($e);
         }
-        return $total;
     }
 
     public function getCar(Request $request)
