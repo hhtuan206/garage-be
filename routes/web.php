@@ -60,7 +60,7 @@ Route::group(['prefix' => 'install'], function () {
 Route::post('findCustomer', 'Users\UsersController@findCustomer')->name('findCustomer');
 Route::post('render-component', 'Backend\ComponentController@renderComponent')->name('render-component');
 Route::post('render-attribute', 'Backend\AttributeController@renderAttribute')->name('render-attribute');
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         /**

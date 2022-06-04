@@ -50,10 +50,11 @@
                 </div>
             </form>
 
-            <div class="table-responsive" id="users-table-wrapper">
+            <div class="table-responsive-sm" id="users-table-wrapper">
                 <table class="table table-striped table-borderless" id="myTable">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th class="min-width-100">@lang('vn.Image')</th>
                         <th class="min-width-100">@lang('vn.Name')</th>
                         <th class="min-width-150">@lang('vn.Price')</th>
@@ -65,8 +66,9 @@
                     </thead>
                     <tbody>
                     @if (count($components))
-                        @foreach ($components as $component)
+                        @foreach ($components as $key => $component)
                             <tr>
+                                <td>{{$key}}</td>
                                 <td><img src="{{asset('component/'.$component->image)}}" alt="" width="75px"
                                          height="75px"></td>
                                 <td>{{ $component->name }}</td>

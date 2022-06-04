@@ -44,7 +44,7 @@
                         </a></div>
                 </div>
             </form>
-            <div class="table-responsive" id="users-table-wrapper">
+            <div class="table-responsive-sm" id="users-table-wrapper">
                 <table class="table table-striped table-borderless">
                     <thead>
                     <tr>

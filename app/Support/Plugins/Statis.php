@@ -13,7 +13,7 @@ class Statis extends \Vanguard\Plugins\Plugin
         $repair = Item::create(__('Thống kê sửa chữa'))
             ->route('statis.repair')
             ->active("admin/statisRepair*")
-           ;
+            ;
 
         $component = Item::create(__('Thống kê linh kiện tồn kho'))
             ->route('statis.component')
@@ -26,6 +26,6 @@ class Statis extends \Vanguard\Plugins\Plugin
             ->addChildren([
                 $repair,
                 $component
-            ]);
+            ])->permissions('admin');
     }
 }

@@ -38,14 +38,12 @@
                     </div>
                     <div class="col-md-3 mt-md-0 mt-2">
                     </div>
-                    @permission('admin')
                     <div class="col-md-6 text-right">
                         <a href="{{ route('appointments.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
                             @lang('vn.Add Appointment')
                         </a>
                     </div>
-                    @endpermission
                 </div>
             </form>
 

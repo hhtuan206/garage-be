@@ -13,6 +13,6 @@ class Import extends \Vanguard\Plugins\Plugin
         return Item::create(__('vn.Import'))
             ->route('imports.index')
             ->icon('fas fa-rainbow')
-            ->active("imports*");
+            ->active("imports*")->permissions('admin');
     }
 }

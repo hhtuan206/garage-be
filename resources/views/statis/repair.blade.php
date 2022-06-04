@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </form>
-            <div class="table-responsive" id="users-table-wrapper">
+            <div class="table-responsive-sm" id="users-table-wrapper">
                 <table class="table table-borderless table-striped">
                     <thead>
                     <tr>
@@ -108,12 +108,20 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row ">
+                <div class="col-md-12 text-right">
+                    <strong>Tổng doanh thu</strong>: {{number_format($repairs->sum('total_price',0))}} đ
+                </div>
+
+            </div>
         </div>
+
     </div>
     <br>
     <div class="row table-responsive">
         <div class="col-md-12 text-right">
-            <a href="" class="btn btn-primary btn-rounded float-right">
+            <a href="{{request()->fullUrlWithQuery(['export'=>'excel'])}}"
+               class="btn btn-primary btn-rounded float-right">
                 <i class="fa fa-print"></i>
                 @lang('In thống kê')
             </a>
