@@ -1,6 +1,7 @@
 as.dashboard = {};
 
 as.dashboard.initChart = function () {
+
     var data = {
         labels: months,
         datasets: [
@@ -9,11 +10,11 @@ as.dashboard.initChart = function () {
                 backgroundColor: "transparent",
                 borderColor: "#179970",
                 pointBackgroundColor: "#179970",
-                data: users
+                data: repairs
             }
         ]
     };
-
+    console.log(data)
     var ctx = document.getElementById("myChart").getContext("2d");
     var myLineChart = new Chart(ctx, {
         type: 'line',
@@ -47,7 +48,7 @@ as.dashboard.initChart = function () {
                 callbacks: {
                     label: function(tooltipItem, data) {
                         var value = tooltipItem.yLabel,
-                            suffix = trans.new + " " + (value == 1 ? trans.user : trans.users);
+                            suffix = trans.new + " " + (value == 1 ? trans.repair : trans.repairs);
 
                         return " " + value + " " + suffix;
                     }

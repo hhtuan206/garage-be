@@ -2,6 +2,7 @@
 
 namespace Vanguard\Support\Plugins\Dashboard\Widgets;
 
+use Vanguard\Models\Component;
 use Vanguard\Plugins\Widget;
 use Vanguard\Repositories\User\UserRepository;
 use Vanguard\Support\Enum\UserStatus;
@@ -18,27 +19,14 @@ class BannedUsers extends Widget
      */
     protected $permissions = 'users.manage';
 
-    /**
-     * @var UserRepository
-     */
-    protected $users;
-
-    /**
-     * BannedUsers constructor.
-     * @param UserRepository $users
-     */
-    public function __construct(UserRepository $users)
-    {
-        $this->users = $users;
-    }
 
     /**
      * {@inheritDoc}
      */
     public function render()
     {
-        return view('plugins.dashboard.widgets.banned-users', [
-            'count' => $this->users->countByStatus(UserStatus::BANNED)
+        return view('plugins.dashboard.widgets.all-component', [
+            'count' => Component::where('stock', '>', 0)->count()
         ]);
     }
 }

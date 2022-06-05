@@ -12,6 +12,7 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\BannedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\LatestRegistrations;
 use Vanguard\Support\Plugins\Dashboard\Widgets\NewUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\RegistrationHistory;
+use Vanguard\Support\Plugins\Dashboard\Widgets\RepairHistory;
 use Vanguard\Support\Plugins\Dashboard\Widgets\TotalUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UnconfirmedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
@@ -66,9 +67,11 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             UserActions::class,
             TotalUsers::class,
             NewUsers::class,
-            BannedUsers::class,
+
             UnconfirmedUsers::class,
-            RegistrationHistory::class,
+            BannedUsers::class,
+//            RegistrationHistory::class,
+            RepairHistory::class,
             LatestRegistrations::class,
             ActivityWidget::class,
         ];
