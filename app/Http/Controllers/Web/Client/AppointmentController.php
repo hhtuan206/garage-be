@@ -14,6 +14,8 @@ class AppointmentController extends Controller
 {
     const WAITING = 'Waiting';
     const CONFIRM = 'Confirm';
+    const CANCELLED = 'Cancelled';
+    const SUCCESS = 'Success';
 
     public function index()
     {
@@ -38,7 +40,7 @@ class AppointmentController extends Controller
 
     public function history()
     {
-        $appointments = \Auth::user()->appointment->sortByDesc('created_at');
+        $appointments = Appointment::where('user_id', \Auth::id())->orderBy('date', 'asc')->get();
         return view('customer.appointment.list', compact('appointments'));
     }
 }

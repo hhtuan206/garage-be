@@ -63,12 +63,12 @@
                     @if (count($appointments))
                         @foreach ($appointments as $key => $appointment)
                             <tr>
-                               <td>{{$key}}</td>
+                                <td>{{$key}}</td>
                                 <td>{{ $appointment->user->fullname }}</td>
                                 <td>{{$appointment->date_time}}</td>
                                 <td>{!! $appointment->statuss !!}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('repairs.create', ['user' => $appointment->user_id]) }}"
+                                    <a href="{{ route('repairs.create', ['user' => $appointment->user_id,'appointment' => $appointment->id]) }}"
                                        class="btn btn-icon"
                                        title="Sửa chữa" data-toggle="tooltip" data-placement="top">
                                         <i class="fab fa-accusoft"></i>

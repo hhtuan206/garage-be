@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Status</label>
-                        {!! Form::select('status',['Waiting' => 'Đang chờ','Confirm' => 'Xác nhận'],$appointment->status?? '',['class'=>'form-control input-solid']) !!}
+                        {!! Form::select('status',['Waiting' => 'Đang chờ','Confirm' => 'Xác nhận','Success' => 'Thành công','Cancelled' => 'Bị Huỷ'],$appointment->status?? '',['class'=>'form-control input-solid']) !!}
                     </div>
                 </div>
 

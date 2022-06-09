@@ -35,10 +35,30 @@ class Appointment extends Model
 
     public function getStatussAttribute()
     {
-        if ($this->status == 'Waiting') {
-            return '<label for="" class="badge badge-primary">Đang chờ</label>';
+        switch ($this->status) {
+            case 'Waiting':
+                return '<label for="" class="badge badge-warning">Đang chờ</label>';
+            case 'Confirm':
+                return '<label for="" class="badge badge-info">Xác nhận</label>';
+            case 'Cancelled':
+                return '<label for="" class="badge badge-primary">Bị huỷ</label>';
+            case 'Success':
+                return '<label for="" class="badge badge-success">Thành công</label>';
         }
-        return '<label for="" class="badge badge-info">Xác nhận</label>';
+    }
+
+    public function getStAttribute()
+    {
+        switch ($this->status) {
+            case 'Waiting':
+                return '<label for="" class="badge bg-warning">Đang chờ</label>';
+            case 'Confirm':
+                return '<label for="" class="badge bg-info">Xác nhận</label>';
+            case 'Cancelled':
+                return '<label for="" class="badge bg-primary">Bị huỷ</label>';
+            case 'Success':
+                return '<label for="" class="badge bg-success">Thành công</label>';
+        }
     }
 
 //    protected static function boot()

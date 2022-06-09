@@ -19,7 +19,7 @@
     @if ($edit)
         {!! Form::open(['route' => ['repairs.update', $repair], 'method' => 'PUT']) !!}
     @else
-        {!! Form::open(['route' => 'repairs.store','method'=>'POST']) !!}
+        {!! Form::open(['route' => ['repairs.store',['appointment' => $appointment]],'method'=>'POST']) !!}
     @endif
 
     <div class="card">

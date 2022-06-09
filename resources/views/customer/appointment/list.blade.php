@@ -22,7 +22,7 @@
                     <td class="text-center">{{$appointment->user->fullname}}</td>
                     <td class="text-center">{{$appointment->user->phone}}</td>
                     <td class="text-center">{{$appointment->date_time}}</td>
-                    <td class="text-center"><label for="" class="badge bg-info">{{$appointment->status}}</label></td>
+                    <td class="text-center">{!! $appointment->st !!}</label></td>
                     <td class="text-center">{{$appointment->date_create}}</td>
                     <td class="text-center"><a href=""><i class='fas fa-capsules'></i></a></td>
                 </tr>

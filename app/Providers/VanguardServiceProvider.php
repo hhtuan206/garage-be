@@ -73,7 +73,7 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
 //            RegistrationHistory::class,
             RepairHistory::class,
             LatestRegistrations::class,
-            ActivityWidget::class,
+//            ActivityWidget::class,
         ];
     }
 }

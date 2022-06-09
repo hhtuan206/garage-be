@@ -5,6 +5,7 @@ namespace Vanguard\Http\Controllers\Web\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Fluent;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Models\Appointment;
 use Vanguard\Models\Attribute;
 use Vanguard\Models\Car;
 use Vanguard\Models\Component;
@@ -12,6 +13,7 @@ use Vanguard\Models\Repair;
 use Vanguard\Models\Service;
 use Vanguard\Role;
 use Vanguard\User;
+use DB;
 
 class RepairController extends Controller
 {
@@ -41,7 +43,7 @@ class RepairController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $attributes = Attribute::all()->pluck('name', 'id');
         $services = Service::all()->pluck('name', 'id');
@@ -56,6 +58,7 @@ class RepairController extends Controller
             'services' => $services,
             'components' => $components,
             'users' => $users,
+            'appointment' => $request->appointment
         ];
 
         return view('repair.add-edit', $data);
@@ -71,12 +74,14 @@ class RepairController extends Controller
     {
         $request->validate([
             'car_id' => 'required',
-            'services' => 'required'
+            'services' => 'required',
         ], [
             'car_id.required' => 'Phải chọn 1 xe',
             'services.required' => 'Phải chọn 1 dịch vụ',
         ]);
+        DB::beginTransaction();
         try {
+            Appointment::findOrFail($request->appointment)->update(['status' => 'Success']);
             $total_price = null;
             $repair = Repair::create([
                 'car_id' => $request->car_id,
@@ -91,7 +96,7 @@ class RepairController extends Controller
             if ($request->has('components')) {
                 foreach ($request->components as $key => $component) {
                     $ct = Component::find($component);
-                    $ct->stock = (int)$ct->stock - (int) $request->quantities[$key];
+                    $ct->stock = (int)$ct->stock - (int)$request->quantities[$key];
                     $ct->save();
                     $repair->components()->attach([$component => ['quantity' => $request->quantities[$key]]]);
                 }
@@ -99,9 +104,11 @@ class RepairController extends Controller
             }
             $repair->total_price = $total_price;
             $repair->save();
+            DB::commit();
             return redirect()->route('repairs.index')
                 ->withSuccess(__('Repair created successfully.'));
         } catch (\Exception $e) {
+            DB::rollback();
             return redirect()->route('repairs.index')
                 ->withErrors(__('Có lỗi sảy ra vui lòng thử lại sau.'));
         }
