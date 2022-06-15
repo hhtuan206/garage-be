@@ -202,8 +202,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
          * Activity Log
          */
 
-        Route::get('admin/activity', 'ActivityController@index')->name('activity.index')
-            ->middleware('permission:users.activity');
 
         Route::get('activity/user/{user}/log', 'Users\ActivityController@index')->name('activity.user')
             ->middleware('permission:users.activity');
@@ -248,6 +246,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/appointments', 'Client\AppointmentController@history')->name('customer.viewAppointment');
     Route::post('/appointments', 'Client\AppointmentController@store')->name('customer.store');
 });
+Route::get('activity', 'ActivityController@index')->name('activity.index')
+    ->middleware('permission:users.activity');
 
 Route::get('/detailComponent/{id}', 'Client\ClientController@getDetailComponent')->name('detail.com');
 Route::post('/getCar', 'Backend\RepairController@getCar')->name('getCar');

@@ -12,6 +12,7 @@ use Vanguard\Repositories\Activity\ActivityRepository;
 use Vanguard\Repositories\Country\CountryRepository;
 use Vanguard\Repositories\Role\RoleRepository;
 use Vanguard\Repositories\User\UserRepository;
+use Vanguard\Role;
 use Vanguard\Support\Enum\UserStatus;
 use Vanguard\User;
 
@@ -43,11 +44,31 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = $this->users->paginate($perPage = 20, $request->search, $request->status);
+//        $users = $this->users->paginate($perPage = 20, $request->search, $request->status);
+        $query = User::query();
 
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+        if ($request->has('roles') && $request->roles != '') {
+            $query->where('role_id', $request->roles);
+        }
+        if (\Auth::user()->role_id == 3) {
+            $query->where('role_id', 2);
+        }
+        if ($request->has('search') && $request->search != '') {
+            $query->where(function ($q) use ($request) {
+                $q->where('username', "like", "%{$request->search}%");
+                $q->orWhere('email', 'like', "%{$request->search}%");
+                $q->orWhere('first_name', 'like', "%{$request->search}%");
+                $q->orWhere('last_name', 'like', "%{$request->search}%");
+            });
+        }
+
+        $users = $query->orderBy('created_at', 'desc')->simplePaginate(12);
         $statuses = ['' => __('All')] + UserStatus::lists();
-
-        return view('user.list', compact('users', 'statuses'));
+        $roles = ['' => __('All')] + Role::all()->pluck('name', 'id')->toArray();
+        return view('user.list', compact('users', 'statuses', 'roles'));
     }
 
     /**
@@ -70,9 +91,13 @@ class UsersController extends Controller
      */
     public function create(CountryRepository $countryRepository, RoleRepository $roleRepository)
     {
+        $query = Role::query();
+        if (\Auth::user()->role_id == 3) {
+            $query->where('id', 2);
+        }
         return view('user.add', [
             'countries' => $this->parseCountries($countryRepository),
-            'roles' => $roleRepository->lists(),
+            'roles' => $query->pluck('name', 'id'),
             'statuses' => UserStatus::lists()
         ]);
     }
@@ -165,7 +190,7 @@ class UsersController extends Controller
     {
         $user = User::where('phone', '=', $request->phone)->firstOrFail();
         return response()->json([
-            'full_name' => $user->first_name ." " . $user->last_name,
+            'full_name' => $user->first_name . " " . $user->last_name,
             'address' => $user->address,
             'email' => $user->email,
             'number_plate' => $user->cars[0]->number_plate,

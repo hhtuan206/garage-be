@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2022 at 12:18 AM
+-- Generation Time: Jun 15, 2022 at 01:14 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -71,7 +71,9 @@ INSERT INTO `appointments` (`id`, `date`, `time`, `user_id`, `status`, `created_
 (24, '2022-3-20', '14:00', 41, 'Confirm', '2022-06-01 21:59:19', '2022-06-01 21:59:19'),
 (25, '2022-4-20', '14:00', 41, 'Confirm', '2022-06-01 21:59:19', '2022-06-01 21:59:19'),
 (26, '2022-6-10', '14:00', 41, 'Waiting', '2022-06-01 21:59:19', '2022-06-01 21:59:19'),
-(27, '2022-6-15', '14:00', 40, 'Waiting', '2022-06-01 21:59:19', '2022-06-01 21:59:19');
+(27, '2022-06-15', '14:00', 40, 'Success', '2022-06-01 21:59:19', '2022-06-09 10:57:12'),
+(28, '2022-06-17', '08:03', 40, 'Success', '2022-06-09 18:03:28', '2022-06-09 18:24:32'),
+(29, '2022-06-11', '08:03', 40, 'Success', '2022-06-09 18:03:37', '2022-06-09 18:09:20');
 
 -- --------------------------------------------------------
 
@@ -232,7 +234,7 @@ CREATE TABLE `components` (
 INSERT INTO `components` (`id`, `name`, `image`, `price`, `stock`, `unit`, `category_id`, `description`, `created_at`, `updated_at`) VALUES
 (4, 'Kích bình acquy hàng Mỹ', '1654117967.jpeg', '500000', '50', 'Cái', 6, '<p>K&iacute;ch b&igrave;nh &aacute;c quy khi b&igrave;nh hết điện</p>', '2022-06-01 14:12:47', '2022-06-01 14:12:47'),
 (5, 'Móc khoá', '1654118158.jpeg', '50000', '10000', 'Cái', 5, '<p>M&oacute;c kho&aacute; cho xe</p>', '2022-06-01 14:15:58', '2022-06-01 14:15:58'),
-(6, 'Cửa hít', '1654118278.jpeg', '4536000', '50', 'Cánh', 6, '<p>Cửa h&iacute;t d&agrave;nh cho oto</p>', '2022-06-01 14:17:58', '2022-06-01 14:17:58'),
+(6, 'Cửa hít', '1654118278.jpeg', '4536000', '49', 'Cánh', 6, '<p>Cửa h&iacute;t d&agrave;nh cho oto</p>', '2022-06-01 14:17:58', '2022-06-03 01:03:16'),
 (7, 'Tẩu sạc', '1654118443.jpeg', '450000', '324', 'Cái', 6, '<p>D&ugrave;ng để sạc điện thoại</p>', '2022-06-01 14:20:43', '2022-06-01 14:20:43'),
 (8, 'Nhớt xe', '1654118506.jpeg', '400000', '4999', 'Chai', 6, '<p>Nhớt chuy&ecirc;n dụng cho oto</p>', '2022-06-01 14:21:46', '2022-06-01 14:57:59'),
 (9, 'Nước rửa kính', '1654118555.jpeg', '200000', '30', 'Chai', 6, '<p>Nước rửa k&iacute;nh cho oto</p>', '2022-06-01 14:22:35', '2022-06-01 14:22:35'),
@@ -612,7 +614,8 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('hhtuan206@gmail.com', '$2y$10$oGVBH5RFMC0ZqoF.h7P0qO8TFxBmEMEmWRupYe05piQkbzoXbiv7K', '2022-06-01 14:54:33');
+('hhtuan206@gmail.com', '$2y$10$GxLOvmr3K/tzGWpD4iFf/..AvD7tfO7K10YXXOvd894N2jioT1Qru', '2022-06-03 00:40:00'),
+('znongdan26@gmail.com', '$2y$10$lBVRUOF5sX6HyyhfBRj0i.Aw4NwOKvBeGLUgVV94/m5yKlhWXJ0gS', '2022-06-03 00:40:53');
 
 -- --------------------------------------------------------
 
@@ -664,6 +667,7 @@ CREATE TABLE `permission_role` (
 
 INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (1, 1),
+(1, 3),
 (2, 1),
 (3, 1),
 (4, 1),
@@ -719,7 +723,11 @@ INSERT INTO `repairs` (`id`, `car_id`, `user_id`, `is_appointment`, `total_price
 (27, 4, 40, NULL, '9936000', '2022-06-01 14:47:50', '2022-06-01 14:47:50'),
 (28, 6, 41, NULL, '500000', '2022-06-01 14:48:01', '2022-06-01 14:48:01'),
 (29, 6, 41, NULL, '14861600', '2022-06-01 14:48:32', '2022-06-01 14:48:32'),
-(30, 8, 40, NULL, '3400000', '2022-06-01 14:57:59', '2022-06-01 14:57:59');
+(30, 8, 40, NULL, '3400000', '2022-06-01 14:57:59', '2022-06-01 14:57:59'),
+(31, 5, 41, NULL, '9536000', '2022-05-03 01:03:16', '2022-06-03 01:03:16'),
+(32, 4, 40, NULL, '2000000', '2022-06-09 10:44:08', '2022-06-09 10:44:08'),
+(33, 4, 40, NULL, '500000', '2022-06-09 18:09:21', '2022-06-09 18:09:21'),
+(34, 4, 40, NULL, '100000', '2022-06-09 18:24:32', '2022-06-09 18:24:32');
 
 -- --------------------------------------------------------
 
@@ -757,7 +765,8 @@ INSERT INTO `repair_component` (`id`, `repair_id`, `component_id`, `quantity`, `
 (28, 29, 10, 1, NULL, NULL),
 (29, 29, 11, 1, NULL, NULL),
 (30, 29, 12, 1, NULL, NULL),
-(31, 30, 8, 1, NULL, NULL);
+(31, 30, 8, 1, NULL, NULL),
+(32, 31, 6, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -798,7 +807,11 @@ INSERT INTO `repair_service` (`id`, `service_id`, `repair_id`, `created_at`, `up
 (39, 25, 28, NULL, NULL),
 (40, 28, 29, NULL, NULL),
 (41, 24, 30, NULL, NULL),
-(42, 26, 30, NULL, NULL);
+(42, 26, 30, NULL, NULL),
+(43, 27, 31, NULL, NULL),
+(44, 26, 32, NULL, NULL),
+(45, 25, 33, NULL, NULL),
+(46, 23, 34, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -873,7 +886,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('WW28ngk9JeoelswnFeFpdLOQarWAuZEUrKzDxH1h', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMk5SYWdMcVRqclM1V3BVdVFmTUFveDFyY09hZHAyZFZBajZqTGhTTCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMyOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY29tcG9uZW50cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl8zZGM3YTkxM2VmNWZkNGI4OTBlY2FiZTM0ODcwODU1NzNlMTZjZjgyIjtpOjE7fQ==', 1654121924);
+('FlZii2KKasa1tcXkY7rgVsUprYaePZdIvuwUUeaF', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.39', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidEd1U0Q2dzRRN2NKdFV4a3JNVHBoWkRFenJicVBrbWhRb25mYnByWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl8zZGM3YTkxM2VmNWZkNGI4OTBlY2FiZTM0ODcwODU1NzNlMTZjZjgyIjtpOjE7fQ==', 1655200985),
+('ICi1oPqxRHCOLz0sMajDT4oeyjTP7aefoNKY4Aa7', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWXlWTExQQUdMdmFxV2pKYWdCSmMxZlhYb0NyeUpaNDg0aXAySk4xWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hcHBvaW50bWVudCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl8zZGM3YTkxM2VmNWZkNGI4OTBlY2FiZTM0ODcwODU1NzNlMTZjZjgyIjtpOjQwO30=', 1654823197),
+('JAx9SbfDlciu624FCGQFKARFFNGK4DN6hJQT6IwC', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaEZBYVRRMEZNQktZaUNoUW40ckYwdzk2VkNuQmVvZGRnejZiMWpmNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMwOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvc2VydmljZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfM2RjN2E5MTNlZjVmZDRiODkwZWNhYmUzNDg3MDg1NTczZTE2Y2Y4MiI7aTo0MDt9', 1654824430);
 
 -- --------------------------------------------------------
 
@@ -964,11 +979,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `last_name`, `phone`, `avatar`, `address`, `country_id`, `role_id`, `birthday`, `last_login`, `status`, `two_factor_country_code`, `two_factor_phone`, `two_factor_options`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `announcements_last_read_at`) VALUES
-(1, 'admin@example.com', 'admin', '$2y$10$Nhy5pI3paXksKTGE2nXQ7ussvPoylI9grh8xAMGsIt/Rwjy2mTVpu', 'admin', 'Hà', '1234567890', 'Apyc70pK66lN0WMsycrJSKu9Gc76UT0DbR8Fwb9l.jpeg', 'adssad', NULL, 1, NULL, '2022-06-01 14:57:34', 'Active', NULL, NULL, NULL, '2022-05-10 08:59:46', NULL, '2022-05-10 08:59:46', '2022-06-01 14:57:34', '2022-05-13 22:41:13'),
+(1, 'admin@example.com', 'admin', '$2y$10$Nhy5pI3paXksKTGE2nXQ7ussvPoylI9grh8xAMGsIt/Rwjy2mTVpu', 'admin', 'Hà', '1234567890', 'Apyc70pK66lN0WMsycrJSKu9Gc76UT0DbR8Fwb9l.jpeg', 'adssad', NULL, 1, NULL, '2022-06-14 02:39:22', 'Active', NULL, NULL, NULL, '2022-05-10 08:59:46', NULL, '2022-05-10 08:59:46', '2022-06-14 02:39:22', '2022-05-13 22:41:13'),
 (2, 'hhtuan206@gmail.com', 'hht', '$2y$10$pqxmn5PillqdpEPytX/Wpen8cMiPd6swlhC0km/XDdwT02TGcHJCa', 'Tuấn', 'Hà', '+84968954324', NULL, 'adssad', NULL, 2, NULL, '2022-05-13 22:12:30', 'Active', NULL, NULL, NULL, '2022-05-10 08:59:46', NULL, '2022-05-10 11:30:23', '2022-06-01 11:50:55', '2022-05-13 22:41:32'),
-(40, 'hungquan1907@gmail.com', NULL, '$2y$10$Bx1zbvhqk/xpKKRg1miRYO4GCV01Xiu93fQ9sN2bEcHR3gTaKHdYi', 'Nguyễn', 'Quân', NULL, NULL, NULL, NULL, 2, NULL, NULL, 'Active', NULL, NULL, NULL, '2022-06-01 13:58:57', NULL, '2022-06-01 13:58:57', '2022-06-01 13:58:57', NULL),
-(41, 'datduong@gmail.com', NULL, '$2y$10$W89SMff.WqXwxc21.TJH5eAh5sjOzCUsbAPx9RmVFg9ZWKY5QLVom', 'Dương', 'Đạt', NULL, NULL, NULL, NULL, 2, NULL, NULL, 'Active', NULL, NULL, NULL, '2022-06-01 13:59:36', NULL, '2022-06-01 13:59:36', '2022-06-01 13:59:36', NULL),
-(42, 'vuhai@gmail.com', NULL, '$2y$10$i80pC3RaQJcE20SaRJRw7uc97DUrk5.s5oFIMn5Uuq8JtLiyYRVsK', 'Vũ', 'Hải', NULL, NULL, NULL, NULL, 3, NULL, NULL, 'Active', NULL, NULL, NULL, '2022-06-01 14:00:26', NULL, '2022-06-01 14:00:26', '2022-06-01 14:00:26', NULL),
+(40, 'hungquan1907@gmail.com', NULL, '$2y$10$Bx1zbvhqk/xpKKRg1miRYO4GCV01Xiu93fQ9sN2bEcHR3gTaKHdYi', 'Nguyễn', 'Quân', NULL, NULL, NULL, NULL, 2, NULL, '2022-06-09 18:26:24', 'Active', NULL, NULL, NULL, '2022-06-01 13:58:57', NULL, '2022-06-01 13:58:57', '2022-06-09 18:26:24', NULL),
+(41, 'znongdan26@gmail.com', NULL, '$2y$10$W89SMff.WqXwxc21.TJH5eAh5sjOzCUsbAPx9RmVFg9ZWKY5QLVom', 'Dương', 'Đạt', NULL, NULL, NULL, NULL, 2, NULL, '2022-06-03 01:07:35', 'Active', NULL, NULL, NULL, '2022-06-01 13:59:36', NULL, '2022-06-01 13:59:36', '2022-06-03 01:07:35', NULL),
+(42, 'vuhai@gmail.com', NULL, '$2y$10$i80pC3RaQJcE20SaRJRw7uc97DUrk5.s5oFIMn5Uuq8JtLiyYRVsK', 'Vũ', 'Hải', NULL, NULL, NULL, NULL, 3, NULL, '2022-06-09 17:52:46', 'Active', NULL, NULL, NULL, '2022-06-01 14:00:26', NULL, '2022-06-01 14:00:26', '2022-06-09 17:52:46', NULL),
 (43, 'kiengo@gmail.com', NULL, '$2y$10$v3sf6PEIbkdDOxfQ9pSuJeOGpe.4qpbhNBajQRg08/pC4Y3f6HR/y', 'Ngô', 'Kiên', NULL, NULL, NULL, NULL, 3, NULL, NULL, 'Active', NULL, NULL, NULL, '2022-06-01 14:00:58', NULL, '2022-06-01 14:00:59', '2022-06-01 14:00:59', NULL);
 
 -- --------------------------------------------------------
@@ -1069,7 +1084,46 @@ INSERT INTO `user_activity` (`id`, `description`, `user_id`, `ip_address`, `user
 (78, 'Updated role permissions.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 13:35:07'),
 (79, 'Updated role permissions.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 13:41:40'),
 (80, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 14:54:26'),
-(81, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 14:57:34');
+(81, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 14:57:34'),
+(82, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 15:19:47'),
+(83, 'Logged in.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 15:20:00'),
+(84, 'Logged out.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 15:22:49'),
+(85, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 15:22:51'),
+(86, 'Logged in.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:24:26'),
+(87, 'Logged out.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:27:34'),
+(88, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:27:37'),
+(89, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:33:35'),
+(90, 'Logged in.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:33:47'),
+(91, 'Logged out.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:34:26'),
+(92, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 18:34:28'),
+(93, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53', '2022-06-01 19:50:52'),
+(94, 'Requested password reset email.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 00:40:59'),
+(95, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 00:58:03'),
+(96, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:03:52'),
+(97, 'Logged in.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:05:11'),
+(98, 'Logged out.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:05:43'),
+(99, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:06:43'),
+(100, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:07:15'),
+(101, 'Logged in.', 41, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-03 01:07:35'),
+(102, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-04 11:57:34'),
+(103, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-04 23:44:37'),
+(104, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-05 02:49:14'),
+(105, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.30', '2022-06-05 08:16:41'),
+(106, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-08 11:34:14'),
+(107, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 09:37:26'),
+(108, 'Logged in.', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 10:45:14'),
+(109, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 17:38:38'),
+(110, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 17:52:18'),
+(111, 'Logged in.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 17:52:46'),
+(112, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 17:53:40'),
+(113, 'Updated role permissions.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 17:54:00'),
+(114, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:02:47'),
+(115, 'Logged in.', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:03:07'),
+(116, 'Logged out.', 42, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:07:09'),
+(117, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:07:15'),
+(118, 'Logged out.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:25:59'),
+(119, 'Logged in.', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.33', '2022-06-09 18:26:24'),
+(120, 'Logged in.', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36 Edg/102.0.1245.39', '2022-06-14 02:39:22');
 
 -- --------------------------------------------------------
 
@@ -1304,7 +1358,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `attributes`
@@ -1376,19 +1430,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `repairs`
 --
 ALTER TABLE `repairs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `repair_component`
 --
 ALTER TABLE `repair_component`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `repair_service`
 --
 ALTER TABLE `repair_service`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1430,7 +1484,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `values`

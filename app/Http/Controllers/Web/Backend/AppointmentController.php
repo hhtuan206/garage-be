@@ -3,6 +3,7 @@
 namespace Vanguard\Http\Controllers\Web\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Fluent;
 use phpDocumentor\Reflection\Types\This;
 use Vanguard\Http\Controllers\Controller;
@@ -25,6 +26,11 @@ class AppointmentController extends Controller
                 $q->where('users.first_name', 'like', '%' . $request->search . '%')
                     ->orWhere('users.last_name', 'like', '%' . $request->search . '%');
             });
+        }
+        if ($request->has('start_date') && $request->has('end_date') && $request->start_date != '' && $request->end_date != '') {
+            $start_date = Carbon::parse($request->input('start_date'))->startOfDay();;
+            $end_date = Carbon::parse($request->input('end_date'))->startOfDay();
+            $query->whereBetween('date', [$start_date, $end_date]);
         }
         $appointments = $query->orderBy('id', 'desc')->simplePaginate(12);
         return view('appointment.index', compact('appointments'));

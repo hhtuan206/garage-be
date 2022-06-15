@@ -142,16 +142,12 @@
             <!-- end invoice-content -->
             <!-- begin invoice-note -->
             <div class="invoice-note">
-                * Make all cheques payable to [Your Company Name]<br>
-                * Payment is due within 30 days<br>
-                * If you have any questions concerning this invoice, contact [Name, Phone Number, Email]
+                * Nếu có gì không hài lòng vui lòng gọi số 0968954324 để được hỗ trợ <br>
             </div>
             <!-- end invoice-note -->
             <!-- begin invoice-footer -->
             <div class="invoice-footer">
-                <p class="text-center m-b-5 f-w-600">
-                    THANK YOU FOR YOUR BUSINESS
-                </p>
+
                 <p class="text-center">
                     <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> github.com/hhtuan206</span>
                     <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone-volume"></i> T:0968954324</span>

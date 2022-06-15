@@ -36,9 +36,24 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-3 mt-md-0 mt-2">
+                    <div class="col-md-2 mt-md-0 mt-2">
+                        <div class="input-group custom-search-form">
+                            <input type="date"
+                                   class="form-control input-solid"
+                                   name="start_date"
+                                   value="{{ Request::get('start_date') }}"
+                                   placeholder="@lang('Search for users...')">
+                        </div>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-2 mt-md-0 mt-2">
+                        <div class="input-group custom-search-form">
+                            <input type="date"
+                                   class="form-control input-solid"
+                                   name="end_date"
+                                   value="{{ Request::get('end_date') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-right">
                         <a href="{{ route('appointments.create') }}" class="btn btn-primary btn-rounded">
                             <i class="fas fa-plus mr-2"></i>
                             @lang('vn.Add Appointment')

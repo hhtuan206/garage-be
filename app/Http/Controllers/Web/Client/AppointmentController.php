@@ -24,8 +24,7 @@ class AppointmentController extends Controller
 
     public function store(Request $request)
     {
-        $appointmentExist = Appointment::whereBetween('date', [Carbon::now()->subDay(1), date('Y-m-d', strtotime($request->time))])
-            ->where('status', self::WAITING)->exists();
+        $appointmentExist = Appointment::where('status', self::WAITING)->exists();
         if ($appointmentExist) {
             return redirect()->back()->withErrors('Bạn đã đặt lịch rồi, vui lòng đợi xác nhận từ hệ thống!!!!');
         }
